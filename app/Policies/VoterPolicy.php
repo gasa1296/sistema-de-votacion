@@ -6,6 +6,11 @@ use App\Models\User;
 
 class VoterPolicy
 {
+    public function create(User $user): bool
+    {
+        return $user->isAdmin();
+    }
+
     public function viewAny(User $user): bool
     {
         return $user->isAdmin();
@@ -18,7 +23,7 @@ class VoterPolicy
 
     public function update(User $user, User $voter): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     public function delete(User $user, User $voter): bool
