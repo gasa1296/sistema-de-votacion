@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('election_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('candidate_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('election_id')->constrained('elections')->cascadeOnDelete();
+            $table->foreignId('candidate_id')->constrained('candidates')->cascadeOnDelete();
             $table->string('ip_hash')->nullable();
             $table->string('user_agent_hash')->nullable();
             $table->timestamp('voted_at');

@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('election_user', function (Blueprint $table) {
-            $table->foreignId('election_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('election_id')->constrained('elections')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->boolean('has_voted')->default(false);
             $table->timestamp('voted_at')->nullable();
             $table->timestamps();

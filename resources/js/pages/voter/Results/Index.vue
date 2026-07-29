@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
+import { Link, usePoll } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 interface ResultItem {
@@ -18,6 +18,8 @@ const props = defineProps<{
 const maxVotes = computed(() =>
     Math.max(...props.results.map((r) => r.votes), 1),
 );
+
+usePoll(5000, { only: ['results'] });
 </script>
 
 <template>

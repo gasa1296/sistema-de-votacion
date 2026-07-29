@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, onMounted, onUnmounted } from 'vue';
 
 interface ResultItem {
     name: string;
@@ -20,8 +20,36 @@ const props = withDefaults(
     { tone: 'neutral', results: () => [] },
 );
 
+const liveResults = ref<ResultItem[]>([]);
+
+const displayResults = computed<ResultItem[]>(() =>
+    liveResults.value.length > 0 ? liveResults.value : props.results,
+);
+
+let pollTimer: ReturnType<typeof setInterval> | null = null;
+
+onMounted(() => {
+    if (props.results.length > 0) {
+        pollTimer = setInterval(async () => {
+            try {
+                const res = await fetch('/api/results');
+                if (res.ok) {
+                    const data = await res.json();
+                    liveResults.value = data.results ?? [];
+                }
+            } catch {
+                // Polling error — keep last known results
+            }
+        }, 5000);
+    }
+});
+
+onUnmounted(() => {
+    if (pollTimer) clearInterval(pollTimer);
+});
+
 const maxVotes = computed(() =>
-    Math.max(...props.results.map((r) => r.votes), 1),
+    Math.max(...displayResults.value.map((r) => r.votes), 1),
 );
 
 const toneClass: Record<
@@ -183,7 +211,7 @@ const toneClass: Record<
 
             <!-- Results Chart -->
             <div
-                v-if="results.length > 0"
+                v-if="displayResults.length > 0"
                 class="mt-8 space-y-3 text-left"
             >
                 <h2
@@ -192,7 +220,7 @@ const toneClass: Record<
                     Resultados parciales
                 </h2>
                 <div
-                    v-for="item in results"
+                    v-for="item in displayResults"
                     :key="item.name"
                     class="rounded-xl border border-gray-100 bg-white p-3 shadow-xs"
                 >

@@ -59,6 +59,18 @@ Route::middleware(['auth:voter'])->group(function () {
     Route::get('/eleccion-no-abierta', fn () => inertia('voter/ElectionNotOpen'))->name('voter.election-not-open');
 
     Route::get('/resultados', [ResultsController::class, 'show'])->name('voter.results');
+
+    Route::get('/api/results', function () {
+        $election = Election::open()->first() ?? Election::closed()->latest()->first();
+
+        if (! $election) {
+            return response()->json(['results' => []]);
+        }
+
+        return response()->json([
+            'results' => app(ElectionService::class)->results($election),
+        ]);
+    })->name('api.results');
 });
 
 // Export routes (admin guard handled by Filament, but we add for direct access)

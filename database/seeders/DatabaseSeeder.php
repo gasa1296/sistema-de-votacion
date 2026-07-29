@@ -16,15 +16,19 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesSeeder::class);
 
         User::firstOrCreate(
-            ['email' => 'admin@chocomani.test'],
+            ['email' => 'admin@admin.test'],
             [
                 'name' => 'Administrador',
-                'last_name' => 'Choco Maní',
+                'last_name' => 'Admin',
                 'password' => Hash::make('password'),
                 'role' => 'admin',
                 'must_change_password' => false,
                 'email_verified_at' => now(),
             ],
         )->assignRole('admin');
+
+        if (config('app.debug')) {
+            $this->call(TestSeeder::class);
+        }
     }
 }
