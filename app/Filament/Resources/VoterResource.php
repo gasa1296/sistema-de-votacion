@@ -116,6 +116,8 @@ class VoterResource extends Resource
     {
         return [
             'index' => Pages\ListVoters::route('/'),
+            'create' => Pages\CreateVoter::route('/create'),
+            'edit' => Pages\EditVoter::route('/{record}/edit'),
         ];
     }
 }
