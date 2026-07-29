@@ -1,29 +1,33 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3'
+import { Link } from '@inertiajs/vue3';
+import StatusPage from '@/components/Voter/StatusPage.vue';
 </script>
 
 <template>
-    <div class="flex min-h-[60vh] items-center justify-center">
-        <div class="text-center">
-            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/20">
-                <svg class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            </div>
-            <h1 class="mt-6 text-3xl font-bold text-gray-900 dark:text-white">
-                Ya has votado
-            </h1>
-            <p class="mt-4 text-lg text-gray-500 dark:text-gray-400">
-                Has emitido tu voto en esta elección. Cada votante solo puede votar una vez.
-            </p>
-            <div class="mt-8">
-                <Link
-                    href="/resultados"
-                    class="inline-flex items-center rounded-md bg-amber-500 px-4 py-2 text-white hover:bg-amber-600"
+    <StatusPage
+        tone="info"
+        icon="info"
+        title="Ya has votado"
+        description="Has emitido tu voto en esta elección. Cada votante solo puede votar una vez."
+        note="Si crees que hubo un problema con tu voto, contacta al administrador de la elección."
+    >
+        <template #actions>
+            <Link href="/resultados" class="btn-primary w-full sm:w-auto">
+                Ver resultados
+                <svg
+                    class="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
                 >
-                    Ver resultados
-                </Link>
-            </div>
-        </div>
-    </div>
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                </svg>
+            </Link>
+        </template>
+    </StatusPage>
 </template>

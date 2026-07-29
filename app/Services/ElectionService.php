@@ -27,6 +27,20 @@ class ElectionService
         ]);
     }
 
+    public function turnout(Election $election): array
+    {
+        $totalVoters = $election->users()->count();
+        $totalVotes = $election->votes()->count();
+
+        return [
+            'total_voters' => $totalVoters,
+            'total_votes' => $totalVotes,
+            'percentage' => $totalVoters > 0
+                ? round(($totalVotes / $totalVoters) * 100, 1)
+                : 0,
+        ];
+    }
+
     public function results(Election $election): array
     {
         $candidates = $election->candidates()
@@ -61,6 +75,10 @@ class ElectionService
         return DB::transaction(function () use ($user, $candidate, $ip, $userAgent) {
             $user = User::lockForUpdate()->find($user->id);
 
+            if ($user->elections()->where('election_id', $candidate->election_id)->where('has_voted', true)->exists()) {
+                throw new \RuntimeException('Usuario ya ha votado en esta elección.');
+            }
+
             $vote = Vote::create([
                 'election_id' => $candidate->election_id,
                 'candidate_id' => $candidate->id,
@@ -69,10 +87,9 @@ class ElectionService
                 'voted_at' => now(),
             ]);
 
-            $user->elections()->updateExistingPivot($candidate->election_id, [
-                'has_voted' => true,
-                'voted_at' => now(),
-            ]);
+            $electionId = $candidate->election_id;
+
+            $user->elections()->syncWithoutDetaching([$electionId => ['has_voted' => true, 'voted_at' => now()]]);
 
             VoteCast::dispatch($vote);
 

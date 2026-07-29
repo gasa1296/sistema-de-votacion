@@ -24,6 +24,9 @@ class VotingController extends Controller
             ->orderBy('display_order')
             ->get();
 
+        $turnout = app(ElectionService::class)->turnout($election);
+        $results = app(ElectionService::class)->results($election);
+
         return Inertia::render('voter/Vote/Index', [
             'election' => $election,
             'candidates' => $candidates,
@@ -33,6 +36,8 @@ class VotingController extends Controller
                 'name' => $user->name,
                 'last_name' => $user->last_name,
             ],
+            'turnout' => $turnout,
+            'results' => $results,
         ]);
     }
 
@@ -41,12 +46,16 @@ class VotingController extends Controller
         $election = $request->attributes->get('election');
         $candidate = $election->candidates()->findOrFail($request->validated('candidate_id'));
 
-        $vote = app(ElectionService::class)->cast(
-            $user = $request->user(),
-            $candidate,
-            $request->ip(),
-            $request->userAgent(),
-        );
+        try {
+            $vote = app(ElectionService::class)->cast(
+                $user = $request->user(),
+                $candidate,
+                $request->ip(),
+                $request->userAgent(),
+            );
+        } catch (\RuntimeException $e) {
+            return redirect()->route('voter.already-voted');
+        }
 
         return redirect()->route('voter.thanks');
     }

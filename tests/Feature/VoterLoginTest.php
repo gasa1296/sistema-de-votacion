@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Election;
 use App\Models\User;
 
 test('voter can view login page', function () {

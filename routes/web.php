@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\VoterLoginController;
 use App\Http\Controllers\ElectionExportController;
 use App\Http\Controllers\ResultsController;
 use App\Http\Controllers\VotingController;
+use App\Models\Election;
+use App\Services\ElectionService;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Welcome')->name('home');
@@ -27,9 +29,33 @@ Route::middleware(['auth:voter'])->group(function () {
 
     Route::post('/logout', [VoterLoginController::class, 'destroy'])->name('voter.logout');
 
-    Route::get('/gracias', fn () => inertia('voter/Thanks'))->name('voter.thanks');
-    Route::get('/ya-votaste', fn () => inertia('voter/AlreadyVoted'))->name('voter.already-voted');
-    Route::get('/eleccion-cerrada', fn () => inertia('voter/ElectionClosed'))->name('voter.election-closed');
+    Route::get('/gracias', function () {
+        $election = Election::open()->first() ?? Election::closed()->latest()->first();
+
+        return inertia('voter/Thanks', $election
+            ? ['results' => app(ElectionService::class)->results($election)]
+            : [],
+        );
+    })->name('voter.thanks');
+
+    Route::get('/ya-votaste', function () {
+        $election = Election::open()->first() ?? Election::closed()->latest()->first();
+
+        return inertia('voter/AlreadyVoted', $election
+            ? ['results' => app(ElectionService::class)->results($election)]
+            : [],
+        );
+    })->name('voter.already-voted');
+
+    Route::get('/eleccion-cerrada', function () {
+        $election = Election::closed()->latest()->first();
+
+        return inertia('voter/ElectionClosed', $election
+            ? ['results' => app(ElectionService::class)->results($election)]
+            : [],
+        );
+    })->name('voter.election-closed');
+
     Route::get('/eleccion-no-abierta', fn () => inertia('voter/ElectionNotOpen'))->name('voter.election-not-open');
 
     Route::get('/resultados', [ResultsController::class, 'show'])->name('voter.results');
