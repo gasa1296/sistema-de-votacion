@@ -18,6 +18,8 @@ Route::middleware('guest:voter')->group(function () {
         ->name('voter.login.store');
 });
 
+Route::get('/resultados', [ResultsController::class, 'show'])->name('voter.results');
+
 Route::middleware(['auth:voter'])->group(function () {
     Route::get('/', [VotingController::class, 'index'])
         ->middleware('election.open')
@@ -57,8 +59,6 @@ Route::middleware(['auth:voter'])->group(function () {
     })->name('voter.election-closed');
 
     Route::get('/eleccion-no-abierta', fn () => inertia('voter/ElectionNotOpen'))->name('voter.election-not-open');
-
-    Route::get('/resultados', [ResultsController::class, 'show'])->name('voter.results');
 
     Route::get('/api/results', function () {
         $election = Election::open()->first() ?? Election::closed()->latest()->first();
