@@ -6,6 +6,8 @@ use App\Models\Candidate;
 use App\Models\Election;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class TestSeeder extends Seeder
 {
@@ -30,10 +32,12 @@ class TestSeeder extends Seeder
             ]));
         }
         for ($i = 0; $i < 20; $i++) {
-            $user = User::factory()->voter()->create([
+            $user = User::create([
                 'name' => "Votante $i",
                 'last_name' => "Apellido $i",
                 'email' => "votante$i@example.com",
+                'password' => Hash::make('password'),
+                'voter_code' => strtoupper(Str::random(8)),
             ]);
             $user->elections()->attach($election->id);
             $user->assignRole('voter');
