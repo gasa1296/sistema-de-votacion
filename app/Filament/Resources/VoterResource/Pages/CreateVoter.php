@@ -14,10 +14,13 @@ class CreateVoter extends CreateRecord
 
     protected function handleRecordCreation(array $data): User
     {
-        $plainPassword = Str::password(symbols: false);
+        if (empty($data['password'])) {
+            $plainPassword = Str::password(symbols: false);
+        } else {
+            $plainPassword = $data['password'];
+        }
 
         $data['password'] = bcrypt($plainPassword);
-        $data['must_change_password'] = true;
         $data['role'] = 'voter';
 
         $record = parent::handleRecordCreation($data);

@@ -13,6 +13,8 @@ class VoteResource extends Resource
 {
     protected static ?string $model = Vote::class;
 
+    protected static ?string $navigationLabel = 'Votos';
+
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-check-circle';
 
     protected static string|\UnitEnum|null $navigationGroup = 'Gestión';

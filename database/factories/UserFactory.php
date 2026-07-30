@@ -25,7 +25,6 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'role' => 'voter',
             'voter_code' => strtoupper(Str::random(8)),
-            'must_change_password' => false,
         ];
     }
 
@@ -34,7 +33,6 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'role' => 'admin',
             'voter_code' => null,
-            'must_change_password' => false,
         ]);
     }
 
@@ -42,13 +40,6 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => 'voter',
-        ]);
-    }
-
-    public function mustChangePassword(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'must_change_password' => true,
         ]);
     }
 

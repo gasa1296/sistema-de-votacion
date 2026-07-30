@@ -17,6 +17,8 @@ class VoterImportResource extends Resource
 {
     protected static ?string $model = VoterImport::class;
 
+    protected static ?string $navigationLabel = 'Importar Votantes';
+
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-arrow-up-tray';
 
     protected static string|\UnitEnum|null $navigationGroup = 'Gestión';

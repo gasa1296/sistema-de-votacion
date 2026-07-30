@@ -75,6 +75,10 @@ class ElectionService
         return DB::transaction(function () use ($user, $candidate, $ip, $userAgent) {
             $user = User::lockForUpdate()->find($user->id);
 
+            if (! $user->elections()->where('election_id', $candidate->election_id)->exists()) {
+                throw new \RuntimeException('Usuario no está asignado a esta elección.');
+            }
+
             if ($user->elections()->where('election_id', $candidate->election_id)->where('has_voted', true)->exists()) {
                 throw new \RuntimeException('Usuario ya ha votado en esta elección.');
             }

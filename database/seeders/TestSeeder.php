@@ -27,10 +27,13 @@ class TestSeeder extends Seeder
                 'election_id' => $election->id,
             ]));
         }
-
-        $users = User::factory(20)->voter()->create();
-
-        foreach ($users as $user) {
+        for ($i = 0; $i < 20; $i++) {
+            $user = User::factory()->voter()->create([
+                'name' => "Votante $i",
+                'last_name' => "Apellido $i",
+                'email' => "votante$i@example.com",
+            ]);
+            $user->elections()->attach($election->id);
             $user->assignRole('voter');
         }
     }

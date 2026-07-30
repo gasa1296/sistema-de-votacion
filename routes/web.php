@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\VoterLoginController;
+use App\Http\Controllers\Auth\VoterPasswordResetController;
 use App\Http\Controllers\ElectionExportController;
 use App\Http\Controllers\ResultsController;
 use App\Http\Controllers\VotingController;
@@ -16,6 +17,17 @@ Route::middleware('guest:voter')->group(function () {
     Route::post('/login', [VoterLoginController::class, 'store'])
         ->middleware('throttle:5,1')
         ->name('voter.login.store');
+
+    Route::get('/olvide-contrasena', [VoterPasswordResetController::class, 'forgotPassword'])
+        ->name('voter.password.forgot');
+    Route::post('/olvide-contrasena', [VoterPasswordResetController::class, 'sendResetLink'])
+        ->middleware('throttle:3,1')
+        ->name('voter.password.email');
+    Route::get('/restablecer-contrasena/{token}', [VoterPasswordResetController::class, 'resetForm'])
+        ->name('voter.password.reset.form');
+    Route::post('/restablecer-contrasena', [VoterPasswordResetController::class, 'reset'])
+        ->middleware('throttle:3,1')
+        ->name('voter.password.reset');
 });
 
 Route::get('/resultados', [ResultsController::class, 'show'])->name('voter.results');

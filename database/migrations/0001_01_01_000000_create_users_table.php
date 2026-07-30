@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('password');
             $table->string('role')->default('voter');
             $table->string('voter_code')->nullable()->unique();
-            $table->boolean('must_change_password')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

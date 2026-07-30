@@ -19,12 +19,6 @@ class VoterLoginController extends Controller
         if (Auth::guard('voter')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            $user = Auth::guard('voter')->user();
-
-            if ($user->must_change_password) {
-                return redirect()->route('voter.change-password');
-            }
-
             return redirect()->route('voter.vote');
         }
 

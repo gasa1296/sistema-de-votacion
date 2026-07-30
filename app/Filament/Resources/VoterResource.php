@@ -18,6 +18,8 @@ class VoterResource extends Resource
 {
     protected static ?string $model = User::class;
 
+    protected static ?string $navigationLabel = 'Votantes';
+
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-users';
 
     protected static string|\UnitEnum|null $navigationGroup = 'Gestión';
@@ -26,23 +28,35 @@ class VoterResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
+        $form = [
+            Forms\Components\TextInput::make('name')
+                ->label('Nombre')
+                ->required()
+                ->maxLength(255),
+            Forms\Components\TextInput::make('last_name')
+                ->label('Apellido')
+                ->maxLength(255),
+            Forms\Components\TextInput::make('email')
+                ->email()
+                ->required()
+                ->maxLength(255),
+            Forms\Components\TextInput::make('voter_code')
+                ->label('Código del Votante')
+                ->maxLength(255)
+                ->disabled(),
+        ];
+        if (config('app.debug')) {
+            $form[] = Forms\Components\TextInput::make('password')
+                ->label('Contraseña')
+                ->maxLength(255)
+                ->password()
+                ->dehydrated(fn ($state): bool => filled($state));
+        }
+
         return $schema
             ->schema([
                 Schemas\Components\Section::make('Información del Votante')
-                    ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('last_name')
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('email')
-                            ->email()
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('voter_code')
-                            ->maxLength(255)
-                            ->disabled(),
-                    ])->columns(2),
+                    ->schema($form)->columns(2),
             ]);
     }
 
@@ -51,9 +65,11 @@ class VoterResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('last_name')
+                    ->label('Apellido')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
@@ -67,9 +83,6 @@ class VoterResource extends Resource
                     ->getStateUsing(fn (User $record): bool => $record->elections()
                         ->wherePivot('has_voted', true)
                         ->exists()),
-                Tables\Columns\IconColumn::make('must_change_password')
-                    ->label('Cambiar contraseña')
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i')
                     ->sortable()
@@ -97,6 +110,13 @@ class VoterResource extends Resource
                     ->modalHeading('Reenviar credenciales')
                     ->modalDescription('¿Estás seguro de que quieres reenviar las credenciales a este votante?')
                     ->action(fn (User $record) => SendVoterCredentialsJob::dispatch($record, 'password-temporal')),
+                Actions\DeleteAction::make()
+                    ->label('Eliminar')
+                    ->icon('heroicon-m-trash')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->modalHeading('Eliminar Votante')
+                    ->modalDescription('¿Estás seguro de que quieres eliminar este votante?'),
             ])
             ->bulkActions([
                 Actions\BulkActionGroup::make([

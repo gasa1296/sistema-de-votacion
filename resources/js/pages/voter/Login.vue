@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3';
+import VoterTopBar from '../../components/VoterTopBar.vue';
 
 defineProps<{
     election?: { name: string; status: string };
@@ -18,8 +19,12 @@ function submit() {
 
 <template>
     <div
-        class="flex min-h-screen flex-col items-center justify-center bg-linear-to-br from-gray-50 via-white to-brand-50/40 px-4 py-12 sm:px-6 lg:px-8"
+        class="flex min-h-screen flex-col bg-linear-to-br from-gray-50 via-white to-brand-50/40"
     >
+        <VoterTopBar />
+        <div
+            class="flex flex-1 flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
+        >
         <div class="w-full max-w-sm">
             <div class="mb-8 text-center">
                 <div
@@ -111,6 +116,9 @@ function submit() {
                             >
                                 Contraseña
                             </label>
+                            <a href="/olvide-contrasena" class="text-sm text-brand-600 hover:text-brand-500">
+                                ¿Olvidaste tu contraseña?
+                            </a>
                         </div>
                         <input
                             id="password"
@@ -200,6 +208,7 @@ function submit() {
             >
                 Tus credenciales fueron enviadas a tu correo electrónico.
             </p>
+        </div>
         </div>
     </div>
 </template>

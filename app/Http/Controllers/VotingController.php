@@ -54,6 +54,10 @@ class VotingController extends Controller
                 $request->userAgent(),
             );
         } catch (\RuntimeException $e) {
+            if ($e->getMessage() === 'Usuario no está asignado a esta elección.') {
+                return redirect()->route('voter.election-closed');
+            }
+
             return redirect()->route('voter.already-voted');
         }
 

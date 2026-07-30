@@ -48,11 +48,11 @@ class ImportVotersJob implements ShouldQueue
         foreach ($rows as $index => $row) {
             try {
                 $email = $row['email'] ?? null;
-                $name = $row['name'] ?? null;
-                $lastName = $row['last_name'] ?? null;
+                $name = $row['nombre'] ?? null;
+                $lastName = $row['apellido'] ?? null;
 
                 if (! $email || ! $name) {
-                    throw new \InvalidArgumentException('Fila '.($index + 1).': email y name son requeridos');
+                    throw new \InvalidArgumentException('Fila '.($index + 1).': email y nombre son requeridos');
                 }
 
                 $voterCode = Str::upper(Str::random(8));
@@ -65,7 +65,6 @@ class ImportVotersJob implements ShouldQueue
                     'password' => Hash::make($plainPassword),
                     'role' => 'voter',
                     'voter_code' => $voterCode,
-                    'must_change_password' => true,
                     'email_verified_at' => now(),
                 ]);
 

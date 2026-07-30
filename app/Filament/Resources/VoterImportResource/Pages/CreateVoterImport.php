@@ -9,6 +9,7 @@ use App\Models\User;
 use Filament\Forms;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\Page;
+use Filament\Schemas\Schema;
 
 class CreateVoterImport extends Page
 {
@@ -16,13 +17,18 @@ class CreateVoterImport extends Page
 
     protected string $view = 'filament.resources.voter-import-resource.pages.create-voter-import';
 
-    public ?int $electionId = null;
-
-    public ?string $filePath = null;
+    public array $data = [];
 
     public function mount(): void
     {
         $this->form->fill([]);
+    }
+
+    public function form(Schema $schema): Schema
+    {
+        return $schema
+            ->components($this->getFormSchema())
+            ->statePath('data');
     }
 
     protected function getFormSchema(): array

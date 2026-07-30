@@ -11,7 +11,11 @@ class EnsureElectionIsOpen
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $election = Election::open()->first();
+        $user = $request->user();
+
+        $election = Election::open()
+            ->whereHas('users', fn ($q) => $q->where('user_id', $user->id))
+            ->first();
 
         if (! $election) {
             return redirect()->route('voter.election-closed');

@@ -23,11 +23,10 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $remember_token
  * @property string $role
  * @property string|null $voter_code
- * @property bool $must_change_password
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'last_name', 'email', 'password', 'role', 'voter_code', 'must_change_password'])]
+#[Fillable(['name', 'last_name', 'email', 'password', 'role', 'voter_code'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -42,7 +41,6 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'must_change_password' => 'boolean',
         ];
     }
 

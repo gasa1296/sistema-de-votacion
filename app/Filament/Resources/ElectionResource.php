@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ElectionResource\Pages;
 use App\Filament\Resources\ElectionResource\RelationManagers\CandidatesRelationManager;
+use App\Filament\Resources\ElectionResource\RelationManagers\VotersRelationManager;
 use App\Models\Election;
 use App\Services\ElectionService;
 use Filament\Actions;
@@ -17,6 +18,8 @@ use Filament\Tables\Table;
 class ElectionResource extends Resource
 {
     protected static ?string $model = Election::class;
+
+    protected static ?string $navigationLabel = 'Elecciones';
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-bolt';
 
@@ -137,6 +140,7 @@ class ElectionResource extends Resource
     {
         return [
             CandidatesRelationManager::class,
+            VotersRelationManager::class,
         ];
     }
 

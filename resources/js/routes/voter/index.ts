@@ -157,6 +157,87 @@ loginForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 login.form = loginForm
 
 /**
+* @see \App\Http\Controllers\ResultsController::results
+* @see app/Http/Controllers/ResultsController.php:12
+* @route '/resultados'
+*/
+export const results = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: results.url(options),
+    method: 'get',
+})
+
+results.definition = {
+    methods: ["get","head"],
+    url: '/resultados',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\ResultsController::results
+* @see app/Http/Controllers/ResultsController.php:12
+* @route '/resultados'
+*/
+results.url = (options?: RouteQueryOptions) => {
+    return results.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ResultsController::results
+* @see app/Http/Controllers/ResultsController.php:12
+* @route '/resultados'
+*/
+results.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: results.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\ResultsController::results
+* @see app/Http/Controllers/ResultsController.php:12
+* @route '/resultados'
+*/
+results.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: results.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\ResultsController::results
+* @see app/Http/Controllers/ResultsController.php:12
+* @route '/resultados'
+*/
+const resultsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: results.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\ResultsController::results
+* @see app/Http/Controllers/ResultsController.php:12
+* @route '/resultados'
+*/
+resultsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: results.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\ResultsController::results
+* @see app/Http/Controllers/ResultsController.php:12
+* @route '/resultados'
+*/
+resultsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: results.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+results.form = resultsForm
+
+/**
 * @see \App\Http\Controllers\Auth\VoterLoginController::logout
 * @see app/Http/Controllers/Auth/VoterLoginController.php:36
 * @route '/logout'
@@ -508,96 +589,15 @@ electionNotOpenForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'g
 
 electionNotOpen.form = electionNotOpenForm
 
-/**
-* @see \App\Http\Controllers\ResultsController::results
-* @see app/Http/Controllers/ResultsController.php:12
-* @route '/resultados'
-*/
-export const results = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: results.url(options),
-    method: 'get',
-})
-
-results.definition = {
-    methods: ["get","head"],
-    url: '/resultados',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\ResultsController::results
-* @see app/Http/Controllers/ResultsController.php:12
-* @route '/resultados'
-*/
-results.url = (options?: RouteQueryOptions) => {
-    return results.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\ResultsController::results
-* @see app/Http/Controllers/ResultsController.php:12
-* @route '/resultados'
-*/
-results.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: results.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ResultsController::results
-* @see app/Http/Controllers/ResultsController.php:12
-* @route '/resultados'
-*/
-results.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: results.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\ResultsController::results
-* @see app/Http/Controllers/ResultsController.php:12
-* @route '/resultados'
-*/
-const resultsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: results.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ResultsController::results
-* @see app/Http/Controllers/ResultsController.php:12
-* @route '/resultados'
-*/
-resultsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: results.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\ResultsController::results
-* @see app/Http/Controllers/ResultsController.php:12
-* @route '/resultados'
-*/
-resultsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: results.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-results.form = resultsForm
-
 const voter = {
     vote: Object.assign(vote, vote85807a),
     login: Object.assign(login, loginDf2c2a),
+    results: Object.assign(results, results),
     logout: Object.assign(logout, logout),
     thanks: Object.assign(thanks, thanks),
     alreadyVoted: Object.assign(alreadyVoted, alreadyVoted),
     electionClosed: Object.assign(electionClosed, electionClosed),
     electionNotOpen: Object.assign(electionNotOpen, electionNotOpen),
-    results: Object.assign(results, results),
 }
 
 export default voter
