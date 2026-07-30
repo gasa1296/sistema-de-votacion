@@ -25,7 +25,7 @@ class TestSeeder extends Seeder
         ];
 
         foreach ($candidates as $data) {
-            Candidate::factory()->create(array_merge($data, [
+            Candidate::create(array_merge($data, [
                 'election_id' => $election->id,
             ]));
         }
