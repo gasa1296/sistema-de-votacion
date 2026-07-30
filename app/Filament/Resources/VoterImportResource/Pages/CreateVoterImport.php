@@ -54,7 +54,7 @@ class CreateVoterImport extends Page
         $user = User::first(); // Admin user
 
         ImportVotersJob::dispatch(
-            $data['file']->store('imports', 'public'),
+            $data['file'],
             $election,
             $user,
         );

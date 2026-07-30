@@ -77,30 +77,12 @@ class VoterResource extends Resource
                 Tables\Columns\TextColumn::make('voter_code')
                     ->label('Código')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('has_voted')
-                    ->label('Votó')
-                    ->boolean()
-                    ->getStateUsing(fn (User $record): bool => $record->elections()
-                        ->wherePivot('has_voted', true)
-                        ->exists()),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                Tables\Filters\SelectFilter::make('has_voted')
-                    ->label('Estado de voto')
-                    ->options([
-                        '1' => 'Ya votó',
-                        '0' => 'No ha votado',
-                    ])
-                    ->query(fn (Builder $query, array $data): Builder => match ($data['value'] ?? null) {
-                        '1' => $query->whereHas('elections', fn ($q) => $q->wherePivot('has_voted', true)),
-                        '0' => $query->whereDoesntHave('elections', fn ($q) => $q->wherePivot('has_voted', true)),
-                        default => $query,
-                    }),
-            ])
+            ->filters([])
             ->actions([
                 Actions\Action::make('resendCredentials')
                     ->label('Reenviar credenciales')

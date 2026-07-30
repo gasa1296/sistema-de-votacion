@@ -14,6 +14,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Concerns\ToArray;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ImportVotersJob implements ShouldQueue
@@ -47,6 +49,8 @@ class ImportVotersJob implements ShouldQueue
 
         foreach ($rows as $index => $row) {
             try {
+                logger('data', $row);
+
                 $email = $row['email'] ?? null;
                 $name = $row['nombre'] ?? null;
                 $lastName = $row['apellido'] ?? null;
@@ -58,16 +62,17 @@ class ImportVotersJob implements ShouldQueue
                 $voterCode = Str::upper(Str::random(8));
                 $plainPassword = Str::random(10);
 
-                $voter = User::findOrCreate([
-                    'email' => $email,
-                ], [
-                    'name' => $name,
-                    'last_name' => $lastName,
-                    'password' => Hash::make($plainPassword),
-                    'role' => 'voter',
-                    'voter_code' => $voterCode,
-                    'email_verified_at' => now(),
-                ]);
+                $voter = User::firstOrCreate(
+                    ['email' => $email],
+                    [
+                        'name' => $name,
+                        'last_name' => $lastName,
+                        'password' => Hash::make($plainPassword),
+                        'role' => 'voter',
+                        'voter_code' => $voterCode,
+                        'email_verified_at' => now(),
+                    ],
+                );
 
                 $voter->elections()->attach($this->election->id);
 
@@ -93,18 +98,14 @@ class ImportVotersJob implements ShouldQueue
 
     private function readRows(): array
     {
-        $data = [];
+        $worksheetData = Excel::toArray(
+            new class implements ToArray, WithHeadingRow
+            {
+                public function array(array $array): void {}
+            },
+            $this->filePath,
+        );
 
-        Excel::load($this->filePath, function ($reader) use (&$data) {
-            $reader->each(function ($row) use (&$data) {
-                $data[] = [
-                    'email' => $row->email ?? null,
-                    'name' => $row->name ?? null,
-                    'last_name' => $row->last_name ?? null,
-                ];
-            });
-        });
-
-        return $data;
+        return $worksheetData[0] ?? [];
     }
 }
