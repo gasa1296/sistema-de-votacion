@@ -58,10 +58,11 @@ class ImportVotersJob implements ShouldQueue
                 $voterCode = Str::upper(Str::random(8));
                 $plainPassword = Str::random(10);
 
-                $voter = User::create([
+                $voter = User::findOrCreate([
+                    'email' => $email,
+                ], [
                     'name' => $name,
                     'last_name' => $lastName,
-                    'email' => $email,
                     'password' => Hash::make($plainPassword),
                     'role' => 'voter',
                     'voter_code' => $voterCode,
