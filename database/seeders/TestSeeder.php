@@ -11,9 +11,11 @@ class TestSeeder extends Seeder
 {
     public function run(): void
     {
-        $election = Election::factory()->open()->create([
+        $election = Election::create([
             'name' => 'Elección de Prueba',
             'description' => 'Elección generada por TestSeeder para pruebas.',
+            'status' => 'open',
+            'opens_at' => now(),
         ]);
 
         $candidates = [
