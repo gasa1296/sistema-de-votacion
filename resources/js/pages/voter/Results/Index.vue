@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Link, usePoll } from '@inertiajs/vue3';
 import { computed } from 'vue';
+import VoterTopBar from '@/components/VoterTopBar.vue';
 
 interface ResultItem {
     name: string;
@@ -23,7 +24,12 @@ usePoll(5000, { only: ['results'] });
 </script>
 
 <template>
-    <div class="mx-auto max-w-2xl space-y-8 px-4 py-10 sm:px-6 sm:py-16">
+    <div class="min-h-screen bg-gray-50">
+        <VoterTopBar />
+
+        <div
+            class="mx-auto max-w-2xl space-y-8 px-4 py-10 sm:px-6 sm:py-16"
+        >
         <!-- Header -->
         <div class="text-center">
             <div
@@ -98,6 +104,7 @@ usePoll(5000, { only: ['results'] });
                 </svg>
                 Volver a la votación
             </Link>
+        </div>
         </div>
     </div>
 </template>

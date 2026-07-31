@@ -4,6 +4,7 @@ import { computed, ref } from 'vue';
 import CandidateCard from '@/components/Voter/CandidateCard.vue';
 import ConfirmVoteDialog from '@/components/Voter/ConfirmVoteDialog.vue';
 import ElectionStatusBanner from '@/components/Voter/ElectionStatusBanner.vue';
+import VoterTopBar from '@/components/VoterTopBar.vue';
 import type { Candidate, Election, Turnout, User } from '../../../types';
 
 interface ResultItem {
@@ -69,7 +70,10 @@ function clearFilters() {
 </script>
 
 <template>
-    <div class="space-y-8">
+    <div class="min-h-screen bg-gray-50">
+        <VoterTopBar />
+
+        <div class="space-y-8">
 
         <!-- User Welcome Hero Card -->
         <div
@@ -344,5 +348,6 @@ function clearFilters() {
             :candidate="selectedCandidate"
             @close="closeDialog"
         />
+        </div>
     </div>
 </template>
