@@ -4,6 +4,7 @@ use App\Models\Candidate;
 use App\Models\Election;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
+use Inertia\Testing\AssertableInertia as Assert;
 
 test('voter can see voting page with open election', function () {
     $user = User::factory()->voter()->create();
@@ -123,4 +124,19 @@ test('voter can see results page', function () {
     $response = $this->get(route('voter.results'));
 
     $response->assertSuccessful();
+    $response->assertInertia(fn (Assert $page) => $page
+        ->component('voter/Results/Index')
+        ->where('user.name', $user->name)
+        ->where('user.last_name', $user->last_name));
+});
+
+test('guest sees results page without user', function () {
+    $election = Election::factory()->open()->create();
+
+    $response = $this->get(route('voter.results'));
+
+    $response->assertSuccessful();
+    $response->assertInertia(fn (Assert $page) => $page
+        ->component('voter/Results/Index')
+        ->where('user', null));
 });

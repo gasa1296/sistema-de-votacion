@@ -20,9 +20,16 @@ class ResultsController extends Controller
 
         $results = app(ElectionService::class)->results($election);
 
+        $user = $request->user('voter');
+
         return Inertia::render('voter/Results/Index', [
             'election' => $election,
             'results' => $results,
+            'user' => $user ? [
+                'id' => $user->id,
+                'name' => $user->name,
+                'last_name' => $user->last_name,
+            ] : null,
         ]);
     }
 }
