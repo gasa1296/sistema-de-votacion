@@ -3,43 +3,40 @@
 namespace App\Mail;
 
 use App\Models\User;
+use App\Models\Vote;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class VoterCredentialsMail extends Mailable
+class VoteConfirmationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public function __construct(
         public readonly User $voter,
-        public readonly string $plainPassword,
+        public readonly Vote $vote,
     ) {}
 
     public function envelope(): Envelope
     {
-        $electionName = $this->voter->elections()->first()?->name ?? config('app.name');
-
         return new Envelope(
-            subject: 'Tus credenciales de votación — '.$electionName,
+            subject: 'Voto registrado — '.$this->vote->election->name,
         );
     }
 
     public function content(): Content
     {
-        $electionName = $this->voter->elections()->first()?->name ?? config('app.name');
-
         return new Content(
-            markdown: 'emails.voter-credentials',
+            markdown: 'emails.vote-confirmation',
             with: [
                 'name' => $this->voter->name,
                 'lastName' => $this->voter->last_name,
-                'email' => $this->voter->email,
-                'password' => $this->plainPassword,
-                'voterCode' => $this->voter->voter_code,
-                'electionName' => $electionName,
+                'electionName' => $this->vote->election->name,
+                'candidateName' => $this->vote->candidate->name.' '.($this->vote->candidate->last_name ?? ''),
+                'position' => $this->vote->candidate->position,
+                'votedAt' => $this->vote->voted_at->format('d/m/Y H:i'),
             ],
         );
     }

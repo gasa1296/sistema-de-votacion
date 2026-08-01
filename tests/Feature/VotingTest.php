@@ -1,8 +1,10 @@
 <?php
 
+use App\Mail\VoteConfirmationMail;
 use App\Models\Candidate;
 use App\Models\Election;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Inertia\Testing\AssertableInertia as Assert;
 
@@ -55,6 +57,29 @@ test('voter can cast a vote', function () {
         'user_id' => $user->id,
         'has_voted' => true,
     ]);
+});
+
+test('voter receives a confirmation email after casting vote', function () {
+    Mail::fake();
+
+    $user = User::factory()->voter()->create();
+    $election = Election::factory()->open()->create();
+    $candidate = Candidate::factory()->create(['election_id' => $election->id]);
+
+    $election->users()->attach($user, ['has_voted' => false]);
+
+    Session::start();
+    $this->actingAs($user, 'voter');
+
+    $this->post(route('voter.vote.store'), [
+        'candidate_id' => $candidate->id,
+    ])->assertRedirect(route('voter.thanks'));
+
+    Mail::assertQueued(VoteConfirmationMail::class, function (VoteConfirmationMail $mail) use ($user, $election) {
+        return $mail->hasTo($user->email)
+            && $mail->voter->is($user)
+            && $mail->vote->election_id === $election->id;
+    });
 });
 
 test('voter cannot vote twice', function () {

@@ -33,7 +33,7 @@ test('voter cannot login with invalid credentials', function () {
     $this->assertGuest('voter');
 });
 
-test('admin can also login as voter', function () {
+test('admin cannot login as voter', function () {
     $user = User::factory()->admin()->create([
         'email' => 'admin@test.com',
         'password' => bcrypt('password'),
@@ -44,8 +44,8 @@ test('admin can also login as voter', function () {
         'password' => 'password',
     ]);
 
-    $response->assertRedirect(route('voter.vote'));
-    $this->assertAuthenticatedAs($user, 'voter');
+    $response->assertSessionHasErrors('email');
+    $this->assertGuest('voter');
 });
 
 test('voter can logout', function () {

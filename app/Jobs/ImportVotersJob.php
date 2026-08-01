@@ -49,8 +49,6 @@ class ImportVotersJob implements ShouldQueue
 
         foreach ($rows as $index => $row) {
             try {
-                logger('data', $row);
-
                 $email = $row['email'] ?? null;
                 $name = $row['nombre'] ?? null;
                 $lastName = $row['apellido'] ?? null;

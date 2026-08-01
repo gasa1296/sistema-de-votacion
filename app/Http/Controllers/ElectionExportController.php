@@ -12,13 +12,12 @@ class ElectionExportController extends Controller
     public function pdf(Election $election)
     {
         $results = $election->votes()
-            ->with('candidate', 'user')
+            ->with('candidate')
             ->get()
             ->map(fn ($vote) => [
                 'candidate' => $vote->candidate->name.' '.($vote->candidate->last_name ?? ''),
                 'position' => $vote->candidate->position,
-                'email' => $vote->user->email,
-                'voter_code' => $vote->user->voter_code,
+                'ip_hash' => $vote->ip_hash ? substr($vote->ip_hash, 0, 16).'...' : 'N/A',
                 'voted_at' => $vote->voted_at->format('Y-m-d H:i:s'),
             ]);
 

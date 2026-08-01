@@ -38,7 +38,7 @@ Route::middleware(['auth:voter'])->group(function () {
         ->name('voter.vote');
 
     Route::post('/votar', [VotingController::class, 'store'])
-        ->middleware(['election.open', 'has.not.voted', 'throttle:5,1'])
+        ->middleware(['throttle:5,1', 'election.open', 'has.not.voted'])
         ->name('voter.vote.store');
 
     Route::post('/logout', [VoterLoginController::class, 'destroy'])->name('voter.logout');

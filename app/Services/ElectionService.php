@@ -95,7 +95,7 @@ class ElectionService
 
             $user->elections()->syncWithoutDetaching([$electionId => ['has_voted' => true, 'voted_at' => now()]]);
 
-            VoteCast::dispatch($vote);
+            VoteCast::dispatch($vote, $user);
 
             return $vote;
         });

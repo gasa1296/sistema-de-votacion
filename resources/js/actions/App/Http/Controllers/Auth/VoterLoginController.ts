@@ -57,7 +57,7 @@ store.form = storeForm
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::destroy
-* @see app/Http/Controllers/Auth/VoterLoginController.php:36
+* @see app/Http/Controllers/Auth/VoterLoginController.php:30
 * @route '/logout'
 */
 export const destroy = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -72,7 +72,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::destroy
-* @see app/Http/Controllers/Auth/VoterLoginController.php:36
+* @see app/Http/Controllers/Auth/VoterLoginController.php:30
 * @route '/logout'
 */
 destroy.url = (options?: RouteQueryOptions) => {
@@ -81,7 +81,7 @@ destroy.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::destroy
-* @see app/Http/Controllers/Auth/VoterLoginController.php:36
+* @see app/Http/Controllers/Auth/VoterLoginController.php:30
 * @route '/logout'
 */
 destroy.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -91,7 +91,7 @@ destroy.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::destroy
-* @see app/Http/Controllers/Auth/VoterLoginController.php:36
+* @see app/Http/Controllers/Auth/VoterLoginController.php:30
 * @route '/logout'
 */
 const destroyForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -101,7 +101,7 @@ const destroyForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> =
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::destroy
-* @see app/Http/Controllers/Auth/VoterLoginController.php:36
+* @see app/Http/Controllers/Auth/VoterLoginController.php:30
 * @route '/logout'
 */
 destroyForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

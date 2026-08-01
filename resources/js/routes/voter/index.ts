@@ -1,6 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 import vote85807a from './vote'
 import loginDf2c2a from './login'
+import password from './password'
 /**
 * @see \App\Http\Controllers\VotingController::vote
 * @see app/Http/Controllers/VotingController.php:14
@@ -83,7 +84,7 @@ voteForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 vote.form = voteForm
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:16
 * @route '/login'
 */
 export const login = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -97,7 +98,7 @@ login.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:16
 * @route '/login'
 */
 login.url = (options?: RouteQueryOptions) => {
@@ -105,7 +106,7 @@ login.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:16
 * @route '/login'
 */
 login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -114,7 +115,7 @@ login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:16
 * @route '/login'
 */
 login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -123,7 +124,7 @@ login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:16
 * @route '/login'
 */
 const loginForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +133,7 @@ const loginForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:16
 * @route '/login'
 */
 loginForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +142,7 @@ loginForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:16
 * @route '/login'
 */
 loginForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -239,7 +240,7 @@ results.form = resultsForm
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::logout
-* @see app/Http/Controllers/Auth/VoterLoginController.php:36
+* @see app/Http/Controllers/Auth/VoterLoginController.php:30
 * @route '/logout'
 */
 export const logout = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -254,7 +255,7 @@ logout.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::logout
-* @see app/Http/Controllers/Auth/VoterLoginController.php:36
+* @see app/Http/Controllers/Auth/VoterLoginController.php:30
 * @route '/logout'
 */
 logout.url = (options?: RouteQueryOptions) => {
@@ -263,7 +264,7 @@ logout.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::logout
-* @see app/Http/Controllers/Auth/VoterLoginController.php:36
+* @see app/Http/Controllers/Auth/VoterLoginController.php:30
 * @route '/logout'
 */
 logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -273,7 +274,7 @@ logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::logout
-* @see app/Http/Controllers/Auth/VoterLoginController.php:36
+* @see app/Http/Controllers/Auth/VoterLoginController.php:30
 * @route '/logout'
 */
 const logoutForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -283,7 +284,7 @@ const logoutForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> =>
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::logout
-* @see app/Http/Controllers/Auth/VoterLoginController.php:36
+* @see app/Http/Controllers/Auth/VoterLoginController.php:30
 * @route '/logout'
 */
 logoutForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -294,7 +295,7 @@ logoutForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 logout.form = logoutForm
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:46
 * @route '/gracias'
 */
 export const thanks = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -308,7 +309,7 @@ thanks.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:46
 * @route '/gracias'
 */
 thanks.url = (options?: RouteQueryOptions) => {
@@ -316,7 +317,7 @@ thanks.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:46
 * @route '/gracias'
 */
 thanks.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -325,7 +326,7 @@ thanks.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:46
 * @route '/gracias'
 */
 thanks.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -334,7 +335,7 @@ thanks.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:46
 * @route '/gracias'
 */
 const thanksForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -343,7 +344,7 @@ const thanksForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:46
 * @route '/gracias'
 */
 thanksForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -352,7 +353,7 @@ thanksForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:46
 * @route '/gracias'
 */
 thanksForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -368,7 +369,7 @@ thanksForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 thanks.form = thanksForm
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:55
 * @route '/ya-votaste'
 */
 export const alreadyVoted = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -382,7 +383,7 @@ alreadyVoted.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:55
 * @route '/ya-votaste'
 */
 alreadyVoted.url = (options?: RouteQueryOptions) => {
@@ -390,7 +391,7 @@ alreadyVoted.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:55
 * @route '/ya-votaste'
 */
 alreadyVoted.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -399,7 +400,7 @@ alreadyVoted.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:55
 * @route '/ya-votaste'
 */
 alreadyVoted.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -408,7 +409,7 @@ alreadyVoted.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:55
 * @route '/ya-votaste'
 */
 const alreadyVotedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -417,7 +418,7 @@ const alreadyVotedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:55
 * @route '/ya-votaste'
 */
 alreadyVotedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -426,7 +427,7 @@ alreadyVotedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'>
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:55
 * @route '/ya-votaste'
 */
 alreadyVotedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -442,7 +443,7 @@ alreadyVotedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'
 alreadyVoted.form = alreadyVotedForm
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:64
 * @route '/eleccion-cerrada'
 */
 export const electionClosed = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -456,7 +457,7 @@ electionClosed.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:64
 * @route '/eleccion-cerrada'
 */
 electionClosed.url = (options?: RouteQueryOptions) => {
@@ -464,7 +465,7 @@ electionClosed.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:64
 * @route '/eleccion-cerrada'
 */
 electionClosed.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -473,7 +474,7 @@ electionClosed.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:64
 * @route '/eleccion-cerrada'
 */
 electionClosed.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -482,7 +483,7 @@ electionClosed.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => 
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:64
 * @route '/eleccion-cerrada'
 */
 const electionClosedForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -491,7 +492,7 @@ const electionClosedForm = (options?: RouteQueryOptions): RouteFormDefinition<'g
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:64
 * @route '/eleccion-cerrada'
 */
 electionClosedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -500,7 +501,7 @@ electionClosedForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:64
 * @route '/eleccion-cerrada'
 */
 electionClosedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -516,7 +517,7 @@ electionClosedForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'ge
 electionClosed.form = electionClosedForm
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:73
 * @route '/eleccion-no-abierta'
 */
 export const electionNotOpen = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -530,7 +531,7 @@ electionNotOpen.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:73
 * @route '/eleccion-no-abierta'
 */
 electionNotOpen.url = (options?: RouteQueryOptions) => {
@@ -538,7 +539,7 @@ electionNotOpen.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:73
 * @route '/eleccion-no-abierta'
 */
 electionNotOpen.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -547,7 +548,7 @@ electionNotOpen.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => (
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:73
 * @route '/eleccion-no-abierta'
 */
 electionNotOpen.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -556,7 +557,7 @@ electionNotOpen.head = (options?: RouteQueryOptions): RouteDefinition<'head'> =>
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:73
 * @route '/eleccion-no-abierta'
 */
 const electionNotOpenForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -565,7 +566,7 @@ const electionNotOpenForm = (options?: RouteQueryOptions): RouteFormDefinition<'
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:73
 * @route '/eleccion-no-abierta'
 */
 electionNotOpenForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -574,7 +575,7 @@ electionNotOpenForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'ge
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:73
 * @route '/eleccion-no-abierta'
 */
 electionNotOpenForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -592,6 +593,7 @@ electionNotOpen.form = electionNotOpenForm
 const voter = {
     vote: Object.assign(vote, vote85807a),
     login: Object.assign(login, loginDf2c2a),
+    password: Object.assign(password, password),
     results: Object.assign(results, results),
     logout: Object.assign(logout, logout),
     thanks: Object.assign(thanks, thanks),

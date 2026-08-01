@@ -1,6 +1,6 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:75
 * @route '/api/results'
 */
 export const results = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -14,7 +14,7 @@ results.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:75
 * @route '/api/results'
 */
 results.url = (options?: RouteQueryOptions) => {
@@ -22,7 +22,7 @@ results.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:75
 * @route '/api/results'
 */
 results.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -31,7 +31,7 @@ results.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:75
 * @route '/api/results'
 */
 results.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -40,7 +40,7 @@ results.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:75
 * @route '/api/results'
 */
 const resultsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -49,7 +49,7 @@ const resultsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:75
 * @route '/api/results'
 */
 resultsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -58,7 +58,7 @@ resultsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see [serialized-closure]:2
+* @see routes/web.php:75
 * @route '/api/results'
 */
 resultsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

@@ -16,7 +16,7 @@ class VoterLoginController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (Auth::guard('voter')->attempt($credentials, $request->boolean('remember'))) {
+        if (Auth::guard('voter')->attempt(array_merge($credentials, ['role' => 'voter']), $request->boolean('remember'))) {
             $request->session()->regenerate();
 
             return redirect()->route('voter.vote');

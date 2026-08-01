@@ -12,8 +12,7 @@
             <tr style="background: #f5f5f5;">
                 <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Candidato</th>
                 <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Cargo</th>
-                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Email Votante</th>
-                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Código</th>
+                <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">IP Hash</th>
                 <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Fecha Voto</th>
             </tr>
         </thead>
@@ -22,8 +21,7 @@
             <tr>
                 <td style="border: 1px solid #ddd; padding: 8px;">{{ $row['candidate'] }}</td>
                 <td style="border: 1px solid #ddd; padding: 8px;">{{ $row['position'] }}</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">{{ $row['email'] }}</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">{{ $row['voter_code'] }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ $row['ip_hash'] ?? 'N/A' }}</td>
                 <td style="border: 1px solid #ddd; padding: 8px;">{{ $row['voted_at'] }}</td>
             </tr>
             @endforeach
