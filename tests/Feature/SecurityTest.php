@@ -33,7 +33,7 @@ test('ip hash is an hmac of the ip address', function () {
     $candidate = Candidate::factory()->create(['election_id' => $election->id]);
     $election->users()->attach($user, ['has_voted' => false]);
 
-    $vote = app(ElectionService::class)->cast($user, $candidate, '203.0.113.7', 'TestAgent');
+    $vote = app(ElectionService::class)->cast($user, $candidate, $election, '203.0.113.7', 'TestAgent');
 
     expect($vote->ip_hash)->toBe(hash_hmac('sha256', '203.0.113.7', config('app.key')));
     expect($vote->ip_hash)->not->toBe('203.0.113.7');
@@ -51,7 +51,7 @@ test('casting a vote writes an audit log entry', function () {
     $candidate = Candidate::factory()->create(['election_id' => $election->id]);
     $election->users()->attach($user, ['has_voted' => false]);
 
-    app(ElectionService::class)->cast($user, $candidate, '127.0.0.1', 'Agent');
+    app(ElectionService::class)->cast($user, $candidate, $election, '127.0.0.1', 'Agent');
 });
 
 test('audit log channel is configured', function () {

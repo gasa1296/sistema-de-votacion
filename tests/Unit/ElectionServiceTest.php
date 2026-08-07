@@ -71,7 +71,7 @@ it('casts a vote with lock for update', function () {
     $election->users()->attach($user, ['has_voted' => false]);
 
     $service = app(ElectionService::class);
-    $vote = $service->cast($user, $candidate, '127.0.0.1', 'TestAgent');
+    $vote = $service->cast($user, $candidate, $election, '127.0.0.1', 'TestAgent');
 
     expect($vote->election_id)->toBe($election->id);
     expect($vote->candidate_id)->toBe($candidate->id);

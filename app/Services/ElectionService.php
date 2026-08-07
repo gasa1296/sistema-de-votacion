@@ -73,7 +73,7 @@ class ElectionService
     public function cast(User $user, ?Candidate $candidate, Election $election, ?string $ip = null, ?string $userAgent = null): Vote
     {
         return DB::transaction(function () use ($user, $candidate, $election, $ip, $userAgent) {
-            $user = User::lockForUpdate()->find($user->id);
+            $user = User::find($user->id);
 
             if (! $user->elections()->where('election_id', $election->id)->exists()) {
                 throw new \RuntimeException('Usuario no está asignado a esta elección.');
@@ -90,7 +90,7 @@ class ElectionService
                 'voted_at' => now(),
             ]);
 
-            $user->elections()->syncWithoutDetaching([$election->id => ['has_voted' => true, 'voted_at' => now()]]);
+            $user->elections()->lockForUpdate()->syncWithoutDetaching([$election->id => ['has_voted' => true, 'voted_at' => now()]]);
 
             VoteCast::dispatch($vote, $user);
 
