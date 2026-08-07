@@ -31,6 +31,23 @@ class CandidatesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('position')
                     ->default('Presidente')
                     ->maxLength(255),
+                Forms\Components\Repeater::make('main_proposals')
+                    ->label('Propuestas principales')
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Textarea::make('description')
+                            ->label('Descripción')
+                            ->rows(2)
+                            ->required(),
+                    ])
+                    ->columns(1)
+                    ->defaultItems(1)
+                    ->addActionLabel('Agregar propuesta')
+                    ->reorderable()
+                    ->collapsible(),
                 Forms\Components\TextInput::make('display_order')
                     ->numeric()
                     ->default(0),

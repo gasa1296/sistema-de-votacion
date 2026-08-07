@@ -18,12 +18,13 @@ use Illuminate\Support\Carbon;
  * @property string|null $description
  * @property string|null $photo_path
  * @property string $position
+ * @property array|null $main_proposals
  * @property int $display_order
  * @property bool $active
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['election_id', 'name', 'last_name', 'description', 'photo_path', 'position', 'display_order', 'active'])]
+#[Fillable(['election_id', 'name', 'last_name', 'description', 'photo_path', 'position', 'display_order', 'active', 'main_proposals'])]
 #[Hidden([])]
 class Candidate extends Model
 {
@@ -34,6 +35,7 @@ class Candidate extends Model
         return [
             'display_order' => 'integer',
             'active' => 'boolean',
+            'main_proposals' => 'array',
         ];
     }
 

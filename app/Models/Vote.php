@@ -12,7 +12,7 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property int $election_id
- * @property int $candidate_id
+ * @property int $candidate_id|null
  * @property string|null $ip_hash
  * @property string|null $user_agent_hash
  * @property Carbon $voted_at

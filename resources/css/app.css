@@ -34,7 +34,7 @@
     }
 
     :focus-visible {
-        outline: 2px solid var(--color-brand-500);
+        outline: 2px solid #1e3a5f;
         outline-offset: 2px;
         border-radius: 4px;
     }
@@ -46,19 +46,19 @@
     }
 
     .btn-primary {
-        @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:bg-brand-800 disabled:cursor-not-allowed disabled:opacity-60;
+        @apply inline-flex items-center justify-center gap-2 rounded-lg bg-[#1e3a5f] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-[#162d4a] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a5f] active:bg-[#12243d] disabled:cursor-not-allowed disabled:opacity-60;
     }
 
     .btn-secondary {
-        @apply inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 shadow-sm transition-all duration-150 hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60;
+        @apply inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 shadow-sm transition-all duration-150 hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a5f] active:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60;
     }
 
     .btn-ghost {
-        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-gray-600 transition-all duration-150 hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-60;
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-gray-600 transition-all duration-150 hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a5f] active:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-60;
     }
 
     .input {
-        @apply block w-full rounded-lg border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 shadow-sm transition-colors placeholder:text-gray-400 hover:border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-50;
+        @apply block w-full rounded-lg border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 shadow-sm transition-colors placeholder:text-gray-400 hover:border-gray-300 focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/20 focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-50;
     }
 
     .card {

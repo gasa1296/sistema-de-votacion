@@ -18,13 +18,16 @@ class ResultsController extends Controller
             return Inertia::render('voter/ElectionClosed');
         }
 
-        $results = app(ElectionService::class)->results($election);
+        $service = app(ElectionService::class);
+        $results = $service->results($election);
+        $turnout = $service->turnout($election);
 
         $user = $request->user('voter');
 
         return Inertia::render('voter/Results/Index', [
             'election' => $election,
             'results' => $results,
+            'turnout' => $turnout,
             'user' => $user ? [
                 'id' => $user->id,
                 'name' => $user->name,

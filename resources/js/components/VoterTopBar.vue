@@ -5,47 +5,36 @@ import type { User } from '../layouts/types';
 
 const page = usePage();
 const user = computed(() => page.props.user as User | undefined);
-const electionName = computed(
-    () =>
-        (page.props.election as { name?: string } | undefined)?.name ??
-        'Sistema de Votación',
+const election = computed(
+    () => page.props.election as { name?: string; description?: string } | undefined,
 );
+const electionName = computed(() => election.value?.name ?? 'Sistema de Votación');
+const electionDescription = computed(() => election.value?.description ?? 'Asamblea General');
 
 const mobileMenuOpen = ref(false);
 
 const userInitials = computed(() => {
-    if (!user.value) {
-        return '';
-    }
-
+    if (!user.value) return '';
     const first = user.value.name?.charAt(0) ?? '';
     const last = user.value.last_name?.charAt(0) ?? '';
-
     return `${first}${last}`.toUpperCase();
 });
 
 const userFullName = computed(() => {
-    if (!user.value) {
-        return '';
-    }
-
+    if (!user.value) return '';
     return `${user.value.name} ${user.value.last_name ?? ''}`.trim();
 });
 </script>
 
 <template>
-    <header
-        class="sticky top-0 z-40 border-b border-gray-200/80 bg-white/80 backdrop-blur-md"
-    >
-        <div
-            class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8"
-        >
+    <header class="bg-[#1e3a5f] text-white">
+        <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
             <Link
                 href="/"
-                class="flex items-center gap-2.5 rounded-md text-gray-900 transition-opacity hover:opacity-80"
+                class="flex items-center gap-3 rounded-md text-white transition-opacity hover:opacity-90"
             >
                 <span
-                    class="flex h-9 w-9 items-center justify-center rounded-lg bg-linear-to-br from-brand-500 to-brand-700 text-white shadow-sm"
+                    class="flex h-9 w-9 items-center justify-center rounded-lg bg-white/15 text-white"
                 >
                     <svg
                         class="h-5 w-5"
@@ -62,15 +51,20 @@ const userFullName = computed(() => {
                         />
                     </svg>
                 </span>
-                <span class="text-base font-semibold tracking-tight">
-                    {{ electionName }}
-                </span>
+                <div class="flex flex-col">
+                    <span class="text-base font-bold tracking-tight leading-tight">
+                        {{ electionName }}
+                    </span>
+                    <span class="text-xs text-white/70 leading-tight">
+                        {{ electionDescription }}
+                    </span>
+                </div>
             </Link>
 
             <nav class="flex items-center gap-2">
                 <Link
                     href="/resultados"
-                    class="btn-ghost"
+                    class="flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20"
                 >
                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <line x1="18" y1="20" x2="18" y2="10" />
@@ -83,20 +77,17 @@ const userFullName = computed(() => {
                 <template v-if="user">
                     <div class="hidden items-center gap-3 sm:flex">
                         <div
-                            class="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 text-sm font-semibold text-brand-700"
+                            class="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-sm font-semibold text-white"
                         >
                             {{ userInitials }}
                         </div>
-                        <span class="text-sm font-medium text-gray-700">
-                            {{ userFullName }}
-                        </span>
                     </div>
 
                     <Link
                         href="/logout"
                         method="post"
                         as="button"
-                        class="btn-ghost"
+                        class="flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20"
                     >
                         <svg
                             class="h-4 w-4"
@@ -112,12 +103,12 @@ const userFullName = computed(() => {
                                 d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"
                             />
                         </svg>
-                        <span class="hidden sm:inline">Cerrar sesión</span>
+                        <span class="hidden sm:inline">Salir</span>
                     </Link>
 
                     <button
                         type="button"
-                        class="btn-ghost sm:hidden"
+                        class="flex items-center justify-center rounded-lg bg-white/10 p-2 text-white sm:hidden"
                         :aria-expanded="mobileMenuOpen"
                         aria-controls="mobile-user-menu"
                         @click="mobileMenuOpen = !mobileMenuOpen"
@@ -153,19 +144,19 @@ const userFullName = computed(() => {
             <div
                 v-if="mobileMenuOpen && user"
                 id="mobile-user-menu"
-                class="border-t border-gray-200 bg-white px-4 py-3 sm:hidden"
+                class="border-t border-white/10 bg-[#1a3252] px-4 py-3 sm:hidden"
             >
                 <div class="flex items-center gap-3">
                     <div
-                        class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-100 text-sm font-semibold text-brand-700"
+                        class="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-sm font-semibold text-white"
                     >
                         {{ userInitials }}
                     </div>
                     <div>
-                        <p class="text-sm font-semibold text-gray-900">
+                        <p class="text-sm font-semibold text-white">
                             {{ userFullName }}
                         </p>
-                        <p class="text-xs text-gray-500">
+                        <p class="text-xs text-white/60">
                             Votante
                         </p>
                     </div>

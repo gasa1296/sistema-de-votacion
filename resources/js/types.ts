@@ -5,6 +5,7 @@ export interface Candidate {
     description?: string;
     photo_path?: string;
     position: string;
+    main_proposals?: { title: string; description: string }[];
 }
 
 export interface Election {

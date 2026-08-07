@@ -43,13 +43,15 @@ class VotingController extends Controller
 
     public function store(StoreVoteRequest $request): RedirectResponse
     {
+        $data = $request->validated();
         $election = $request->attributes->get('election');
-        $candidate = $election->candidates()->findOrFail($request->validated('candidate_id'));
+        $candidate = $data['candidate_id'] ? $election->candidates()->find($data['candidate_id']) : null;
 
         try {
             $vote = app(ElectionService::class)->cast(
-                $user = $request->user(),
+                $request->user(),
                 $candidate,
+                $election,
                 $request->ip(),
                 $request->userAgent(),
             );

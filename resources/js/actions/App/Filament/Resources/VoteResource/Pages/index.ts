@@ -1,5 +1,4 @@
 import ListVotes from './ListVotes'
-
 const Pages = {
     ListVotes: Object.assign(ListVotes, ListVotes),
 }

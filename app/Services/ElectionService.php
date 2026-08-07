@@ -70,30 +70,27 @@ class ElectionService
             ->exists();
     }
 
-    public function cast(User $user, Candidate $candidate, ?string $ip = null, ?string $userAgent = null): Vote
+    public function cast(User $user, ?Candidate $candidate, Election $election, ?string $ip = null, ?string $userAgent = null): Vote
     {
-        return DB::transaction(function () use ($user, $candidate, $ip, $userAgent) {
+        return DB::transaction(function () use ($user, $candidate, $election, $ip, $userAgent) {
             $user = User::lockForUpdate()->find($user->id);
 
-            if (! $user->elections()->where('election_id', $candidate->election_id)->exists()) {
+            if (! $user->elections()->where('election_id', $election->id)->exists()) {
                 throw new \RuntimeException('Usuario no está asignado a esta elección.');
             }
 
-            if ($user->elections()->where('election_id', $candidate->election_id)->where('has_voted', true)->exists()) {
+            if ($user->elections()->where('election_id', $election->id)->where('has_voted', true)->exists()) {
                 throw new \RuntimeException('Usuario ya ha votado en esta elección.');
             }
-
             $vote = Vote::create([
-                'election_id' => $candidate->election_id,
-                'candidate_id' => $candidate->id,
+                'election_id' => $election->id,
+                'candidate_id' => $candidate?->id,
                 'ip_hash' => $ip ? hash_hmac('sha256', $ip, config('app.key')) : null,
                 'user_agent_hash' => $userAgent ? hash_hmac('sha256', $userAgent, config('app.key')) : null,
                 'voted_at' => now(),
             ]);
 
-            $electionId = $candidate->election_id;
-
-            $user->elections()->syncWithoutDetaching([$electionId => ['has_voted' => true, 'voted_at' => now()]]);
+            $user->elections()->syncWithoutDetaching([$election->id => ['has_voted' => true, 'voted_at' => now()]]);
 
             VoteCast::dispatch($vote, $user);
 

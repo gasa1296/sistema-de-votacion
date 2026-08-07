@@ -23,7 +23,7 @@ class StoreVoteRequest extends FormRequest
 
         return [
             'candidate_id' => [
-                'required',
+                'nullable',
                 'exists:candidates,id',
                 Rule::in(
                     $election->candidates()->where('active', true)->pluck('id')
