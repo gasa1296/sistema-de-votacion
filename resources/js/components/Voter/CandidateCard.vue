@@ -43,7 +43,7 @@ function handlePhotoClick(event: Event) {
         :aria-pressed="selected"
         class="group flex items-center gap-4 rounded-2xl border-2 p-4 transition-all duration-200 cursor-pointer"
         :class="selected
-            ? 'border-[#1e3a5f] bg-[#1e3a5f]/5 shadow-md'
+            ? 'border-[#bd1622] bg-[#bd1622]/5 shadow-md'
             : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'"
         @click="emit('select', candidate)"
         @keydown="handleKeydown"
@@ -64,7 +64,7 @@ function handlePhotoClick(event: Event) {
                 />
                 <div
                     v-else
-                    class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1e3a5f] to-[#2d5a8e] text-xl font-bold text-white"
+                    class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#bd1622] to-[#e23036] text-xl font-bold text-white"
                 >
                     {{ fullName.charAt(0) }}
                 </div>
@@ -91,7 +91,7 @@ function handlePhotoClick(event: Event) {
             </h3>
             <p
                 v-if="candidate.position"
-                class="text-sm font-medium text-[#1e3a5f]"
+                class="text-sm font-medium text-[#bd1622]"
             >
                 {{ candidate.position }}
             </p>
@@ -108,7 +108,7 @@ function handlePhotoClick(event: Event) {
             <div
                 class="flex h-6 w-6 items-center justify-center rounded-full border-2 transition-colors"
                 :class="selected
-                    ? 'border-[#1e3a5f] bg-[#1e3a5f]'
+                    ? 'border-[#bd1622] bg-[#bd1622]'
                     : 'border-gray-300 group-hover:border-gray-400'"
             >
                 <div

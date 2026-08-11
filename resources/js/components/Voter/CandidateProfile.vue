@@ -82,7 +82,7 @@ const fullName = computed(() => {
                                 />
                                 <div
                                     v-else
-                                    class="flex h-32 w-32 items-center justify-center rounded-3xl bg-gradient-to-br from-[#1e3a5f] to-[#2d5a8e] text-5xl font-bold text-white shadow-lg"
+                                    class="flex h-32 w-32 items-center justify-center rounded-3xl bg-gradient-to-br from-[#bd1622] to-[#e23036] text-5xl font-bold text-white shadow-lg"
                                 >
                                     {{ fullName.charAt(0) }}
                                 </div>
@@ -90,7 +90,7 @@ const fullName = computed(() => {
                                 <h3 class="mt-4 text-2xl font-bold text-gray-900">
                                     {{ fullName }}
                                 </h3>
-                                <p class="mt-1 text-base font-semibold text-[#1e3a5f]">
+                                <p class="mt-1 text-base font-semibold text-[#bd1622]">
                                     {{ candidate.position }}
                                 </p>
                                 <p
@@ -123,7 +123,7 @@ const fullName = computed(() => {
                                     :key="index"
                                     class="flex items-start gap-3"
                                 >
-                                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#1e3a5f]/10 text-[#1e3a5f]">
+                                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#bd1622]/10 text-[#bd1622]">
                                         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                                             <polyline points="14 2 14 8 20 8" />
