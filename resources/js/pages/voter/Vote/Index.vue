@@ -68,7 +68,7 @@ function closeProfile() {
         <VoterTopBar />
 
         <!-- Secret Vote Banner -->
-        <div class="bg-[#1e3a5f] px-4 py-3 text-center">
+        <div class="bg-[#bd1622] px-4 py-3 text-center">
             <div class="flex items-center justify-center gap-2 text-sm text-white">
                 <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -113,7 +113,7 @@ function closeProfile() {
                         href="/logout"
                         method="post"
                         as="button"
-                        class="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-[#1e3a5f] px-6 py-4 text-base font-bold text-[#1e3a5f] transition-colors hover:bg-[#1e3a5f]/5"
+                        class="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-[#bd1622] px-6 py-4 text-base font-bold text-[#bd1622] transition-colors hover:bg-[#bd1622]/5"
                     >
                         Cerrar sesión
                         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -135,14 +135,14 @@ function closeProfile() {
                         <div
                             class="flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold"
                             :class="currentStep === 1
-                                ? 'bg-[#1e3a5f] text-white'
+                                ? 'bg-[#bd1622] text-white'
                                 : 'bg-gray-200 text-gray-600'"
                         >
                             1
                         </div>
                         <span
                             class="text-sm font-semibold"
-                            :class="currentStep === 1 ? 'text-[#1e3a5f]' : 'text-gray-500'"
+                            :class="currentStep === 1 ? 'text-[#bd1622]' : 'text-gray-500'"
                         >
                             Selecciona candidato
                         </span>
@@ -152,14 +152,14 @@ function closeProfile() {
                         <div
                             class="flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold"
                             :class="currentStep === 2
-                                ? 'bg-[#1e3a5f] text-white'
+                                ? 'bg-[#bd1622] text-white'
                                 : 'bg-gray-200 text-gray-600'"
                         >
                             2
                         </div>
                         <span
                             class="text-sm font-semibold"
-                            :class="currentStep === 2 ? 'text-[#1e3a5f]' : 'text-gray-500'"
+                            :class="currentStep === 2 ? 'text-[#bd1622]' : 'text-gray-500'"
                         >
                             Confirmar voto
                         </span>

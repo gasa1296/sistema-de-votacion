@@ -93,10 +93,10 @@ function handleBackdropKeydown(event: KeyboardEvent) {
                         <!-- Header with icon -->
                         <div class="px-6 pt-8 text-center">
                             <div
-                                class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#1e3a5f]/10"
+                                class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#bd1622]/10"
                             >
                                 <svg
-                                    class="h-8 w-8 text-[#1e3a5f]"
+                                    class="h-8 w-8 text-[#bd1622]"
                                     viewBox="0 0 24 24"
                                     fill="none"
                                     stroke="currentColor"
@@ -133,7 +133,7 @@ function handleBackdropKeydown(event: KeyboardEvent) {
                                 <p class="text-lg font-bold text-gray-900">
                                     {{ fullName }}
                                 </p>
-                                <p class="text-sm font-medium text-[#1e3a5f]">
+                                <p class="text-sm font-medium text-[#bd1622]">
                                     {{ candidate.position }}
                                 </p>
                                 <p

@@ -28,7 +28,7 @@ const maxVotes = computed(() =>
 );
 
 const barColors = [
-    { bar: 'bg-[#1e3a5f]', badge: 'bg-[#1e3a5f]/10 text-[#1e3a5f]' },
+    { bar: 'bg-[#bd1622]', badge: 'bg-[#bd1622]/10 text-[#bd1622]' },
     { bar: 'bg-amber-500', badge: 'bg-amber-50 text-amber-700' },
     { bar: 'bg-emerald-500', badge: 'bg-emerald-50 text-emerald-700' },
     { bar: 'bg-rose-500', badge: 'bg-rose-50 text-rose-700' },
@@ -77,7 +77,7 @@ usePoll(5000, {
             <div class="mb-6 grid grid-cols-2 gap-4">
                 <!-- Participación -->
                 <div class="rounded-2xl border border-gray-200 bg-white p-4 text-center shadow-sm">
-                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[#1e3a5f]/10 text-[#1e3a5f]">
+                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[#bd1622]/10 text-[#bd1622]">
                         <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                             <circle cx="9" cy="7" r="4" />
@@ -97,7 +97,7 @@ usePoll(5000, {
                 </div>
                 <!-- Votos emitidos -->
                 <div class="rounded-2xl border border-gray-200 bg-white p-4 text-center shadow-sm">
-                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[#1e3a5f]/10 text-[#1e3a5f]">
+                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[#bd1622]/10 text-[#bd1622]">
                         <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                         </svg>
@@ -134,7 +134,7 @@ usePoll(5000, {
                             />
                             <div
                                 v-else
-                                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#1e3a5f] to-[#2d5a8e] text-sm font-bold text-white"
+                                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#bd1622] to-[#e23036] text-sm font-bold text-white"
                             >
                                 {{ item.name.charAt(0) }}
                             </div>
@@ -182,7 +182,7 @@ usePoll(5000, {
 
             <!-- Back Link -->
             <div class="mt-6 text-center">
-                <Link href="/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#1e3a5f] hover:underline">
+                <Link href="/" class="inline-flex items-center gap-2 text-sm font-semibold text-[#bd1622] hover:underline">
                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="19" y1="12" x2="5" y2="12" />
                         <polyline points="12 19 5 12 12 5" />

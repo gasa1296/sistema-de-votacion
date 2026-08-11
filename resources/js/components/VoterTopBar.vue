@@ -27,7 +27,7 @@ const userFullName = computed(() => {
 </script>
 
 <template>
-    <header class="bg-[#1e3a5f] text-white">
+    <header class="bg-[#bd1622] text-white">
         <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
             <Link
                 href="/"
@@ -131,7 +131,7 @@ const userFullName = computed(() => {
             <div
                 v-if="mobileMenuOpen && user"
                 id="mobile-user-menu"
-                class="border-t border-white/10 bg-[#1a3252] px-4 py-3 sm:hidden"
+                class="border-t border-white/10 bg-[#8a0f18] px-4 py-3 sm:hidden"
             >
                 <div class="flex items-center gap-3">
                     <div
