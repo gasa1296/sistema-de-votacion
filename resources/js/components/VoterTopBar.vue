@@ -33,24 +33,11 @@ const userFullName = computed(() => {
                 href="/"
                 class="flex items-center gap-3 rounded-md text-white transition-opacity hover:opacity-90"
             >
-                <span
-                    class="flex h-9 w-9 items-center justify-center rounded-lg bg-white/15 text-white"
-                >
-                    <svg
-                        class="h-5 w-5"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
-                        <path
-                            d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
-                        />
-                    </svg>
-                </span>
+                <img
+                    src="/logo-anacam.svg"
+                    alt="Logo"
+                    class="h-9 w-auto"
+                />
                 <div class="flex flex-col">
                     <span class="text-base font-bold tracking-tight leading-tight">
                         {{ electionName }}

@@ -201,7 +201,7 @@ function closeProfile() {
                     type="button"
                     class="flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-4 text-base font-bold transition-all"
                     :class="selectedCandidate
-                        ? 'bg-[#1e3a5f] text-white shadow-lg hover:bg-[#162d4a]'
+                        ? 'bg-[#bd1622] text-white shadow-lg hover:bg-[#a3121d]'
                         : 'bg-gray-200 text-gray-400 cursor-not-allowed'"
                     :disabled="!selectedCandidate"
                     @click="continueToConfirm"

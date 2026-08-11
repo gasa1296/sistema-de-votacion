@@ -172,7 +172,7 @@ function handleBackdropKeydown(event: KeyboardEvent) {
                         <div class="flex flex-col gap-3 px-6 py-6">
                             <button
                                 type="button"
-                                class="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#1e3a5f] px-6 py-4 text-base font-bold text-white shadow-lg transition-colors hover:bg-[#162d4a] disabled:opacity-50"
+                                class="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#bd1622] px-6 py-4 text-base font-bold text-white shadow-lg transition-colors hover:bg-[#a3121d] disabled:opacity-50"
                                 :disabled="processing"
                                 @click="confirm"
                             >

@@ -30,24 +30,11 @@ function submit() {
         >
         <div class="w-full max-w-sm">
             <div class="mb-8 text-center">
-                <div
-                    class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-brand-500 to-brand-700 text-white shadow-lg shadow-brand-500/20"
-                >
-                    <svg
-                        class="h-7 w-7"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
-                        <path
-                            d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
-                        />
-                    </svg>
-                </div>
+                <img
+                    src="/logo-anacam.svg"
+                    alt="Logo"
+                    class="mx-auto h-16 w-auto"
+                />
                 <h1
                     class="mt-5 text-2xl font-bold tracking-tight text-gray-900"
                 >
