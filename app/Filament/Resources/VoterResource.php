@@ -90,7 +90,7 @@ class VoterResource extends Resource
                     ->requiresConfirmation()
                     ->modalHeading('Reenviar credenciales')
                     ->modalDescription('¿Estás seguro de que quieres reenviar las credenciales a este votante?')
-                    ->action(fn (User $record) => SendVoterCredentialsJob::dispatch($record, 'password-temporal')),
+                    ->action(fn (User $record) => SendVoterCredentialsJob::dispatch($record)),
                 Actions\DeleteAction::make()
                     ->label('Eliminar')
                     ->icon('heroicon-m-trash')
@@ -107,7 +107,7 @@ class VoterResource extends Resource
                         ->icon('heroicon-m-envelope')
                         ->requiresConfirmation()
                         ->action(fn ($records) => $records->each(
-                            fn (User $record) => SendVoterCredentialsJob::dispatch($record, 'password-temporal')
+                            fn (User $record) => SendVoterCredentialsJob::dispatch($record)
                         )),
                 ]),
             ]);

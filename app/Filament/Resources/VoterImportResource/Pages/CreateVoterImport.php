@@ -51,7 +51,7 @@ class CreateVoterImport extends Page
         $data = $this->form->getState();
 
         $election = Election::findOrFail($data['election_id']);
-        $user = User::first(); // Admin user
+        $user = auth()->user(); // Admin user
 
         ImportVotersJob::dispatch(
             $data['file'],

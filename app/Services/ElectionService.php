@@ -79,9 +79,17 @@ class ElectionService
                 throw new \RuntimeException('Usuario no está asignado a esta elección.');
             }
 
-            if ($user->elections()->where('election_id', $election->id)->where('has_voted', true)->exists()) {
+            $claimed = $user->elections()
+                ->wherePivot('has_voted', false)
+                ->updateExistingPivot($election->id, [
+                    'has_voted' => true,
+                    'voted_at' => now(),
+                ]);
+
+            if ($claimed !== 1) {
                 throw new \RuntimeException('Usuario ya ha votado en esta elección.');
             }
+
             $vote = Vote::create([
                 'election_id' => $election->id,
                 'candidate_id' => $candidate?->id,
@@ -89,8 +97,6 @@ class ElectionService
                 'user_agent_hash' => $userAgent ? hash_hmac('sha256', $userAgent, config('app.key')) : null,
                 'voted_at' => now(),
             ]);
-
-            $user->elections()->lockForUpdate()->syncWithoutDetaching([$election->id => ['has_voted' => true, 'voted_at' => now()]]);
 
             VoteCast::dispatch($vote, $user);
 

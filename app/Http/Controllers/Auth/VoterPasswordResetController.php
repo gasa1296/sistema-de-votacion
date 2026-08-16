@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\VoterResetPasswordMail;
 use App\Models\User;
+use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -37,7 +38,10 @@ class VoterPasswordResetController extends Controller
             ]);
         }
 
-        $token = Password::broker('voters')->createToken($user);
+        /** @var PasswordBroker $broker */
+        $broker = Password::broker('voters');
+
+        $token = $broker->createToken($user);
 
         Mail::to($user)->queue(new VoterResetPasswordMail($user, $token));
 
