@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\VoterResetPasswordMail;
 use App\Models\User;
-use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -32,18 +31,11 @@ class VoterPasswordResetController extends Controller
             ->where('role', 'voter')
             ->first();
 
-        if (! $user) {
-            throw ValidationException::withMessages([
-                'email' => [__('No encontramos un votante con ese correo electrónico.')],
-            ]);
+        if ($user) {
+            $token = Password::broker('voters')->createToken($user);
+
+            Mail::to($user)->queue(new VoterResetPasswordMail($user, $token));
         }
-
-        /** @var PasswordBroker $broker */
-        $broker = Password::broker('voters');
-
-        $token = $broker->createToken($user);
-
-        Mail::to($user)->queue(new VoterResetPasswordMail($user, $token));
 
         return back()->with('status', __('Te hemos enviado un enlace para restablecer tu contraseña.'));
     }

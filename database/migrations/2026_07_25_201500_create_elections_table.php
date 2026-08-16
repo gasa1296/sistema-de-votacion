@@ -12,12 +12,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('status')->default('pending');
             $table->timestamp('opens_at')->nullable();
             $table->timestamp('closes_at')->nullable();
             $table->timestamps();
-
-            $table->index('status');
         });
     }
 

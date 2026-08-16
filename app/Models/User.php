@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -59,10 +58,5 @@ class User extends Authenticatable
         return $this->belongsToMany(Election::class)
             ->withPivot('has_voted', 'voted_at')
             ->withTimestamps();
-    }
-
-    public function vote(): HasOne
-    {
-        return $this->hasOne(Vote::class);
     }
 }

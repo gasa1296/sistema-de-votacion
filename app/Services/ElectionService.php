@@ -13,18 +13,12 @@ class ElectionService
 {
     public function open(Election $election): void
     {
-        $election->update([
-            'status' => 'open',
-            'opens_at' => now(),
-        ]);
+        $election->update(['opens_at' => now()]);
     }
 
     public function close(Election $election): void
     {
-        $election->update([
-            'status' => 'closed',
-            'closes_at' => now(),
-        ]);
+        $election->update(['closes_at' => now()]);
     }
 
     public function turnout(Election $election): array
@@ -48,7 +42,7 @@ class ElectionService
             ->orderByDesc('votes_count')
             ->get();
 
-        $totalVotes = $candidates->sum('votes_count');
+        $totalVotes = $election->votes()->count();
 
         return $candidates->map(fn (Candidate $candidate) => [
             'id' => $candidate->id,
@@ -73,12 +67,6 @@ class ElectionService
     public function cast(User $user, ?Candidate $candidate, Election $election, ?string $ip = null, ?string $userAgent = null): Vote
     {
         return DB::transaction(function () use ($user, $candidate, $election, $ip, $userAgent) {
-            $user = User::find($user->id);
-
-            if (! $user->elections()->where('election_id', $election->id)->exists()) {
-                throw new \RuntimeException('Usuario no está asignado a esta elección.');
-            }
-
             $claimed = $user->elections()
                 ->wherePivot('has_voted', false)
                 ->updateExistingPivot($election->id, [
@@ -87,6 +75,10 @@ class ElectionService
                 ]);
 
             if ($claimed !== 1) {
+                if (! $user->elections()->where('election_id', $election->id)->exists()) {
+                    throw new \RuntimeException('Usuario no está asignado a esta elección.');
+                }
+
                 throw new \RuntimeException('Usuario ya ha votado en esta elección.');
             }
 
