@@ -26,7 +26,9 @@ class CandidatesRelationManager extends RelationManager
                     ->rows(3),
                 Forms\Components\FileUpload::make('photo_path')
                     ->image()
+                    ->disk('public')
                     ->directory('candidates')
+                    ->visibility('public')
                     ->nullable(),
                 Forms\Components\TextInput::make('position')
                     ->default('Presidente')
