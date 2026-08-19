@@ -1,9 +1,9 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::store
- * @see app/Http/Controllers/Auth/VoterLoginController.php:12
- * @route '/login'
- */
+* @see Http/Controllers/Auth/VoterLoginController.php:12
+* @route '/login'
+*/
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
@@ -16,49 +16,50 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::store
- * @see app/Http/Controllers/Auth/VoterLoginController.php:12
- * @route '/login'
- */
+* @see Http/Controllers/Auth/VoterLoginController.php:12
+* @route '/login'
+*/
 store.url = (options?: RouteQueryOptions) => {
     return store.definition.url + queryParams(options)
 }
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::store
- * @see app/Http/Controllers/Auth/VoterLoginController.php:12
- * @route '/login'
- */
+* @see Http/Controllers/Auth/VoterLoginController.php:12
+* @route '/login'
+*/
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
 })
 
-    /**
+/**
 * @see \App\Http\Controllers\Auth\VoterLoginController::store
- * @see app/Http/Controllers/Auth/VoterLoginController.php:12
- * @route '/login'
- */
-    const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: store.url(options),
-        method: 'post',
-    })
+* @see Http/Controllers/Auth/VoterLoginController.php:12
+* @route '/login'
+*/
+const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
 
-            /**
+/**
 * @see \App\Http\Controllers\Auth\VoterLoginController::store
- * @see app/Http/Controllers/Auth/VoterLoginController.php:12
- * @route '/login'
- */
-        storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: store.url(options),
-            method: 'post',
-        })
-    
-    store.form = storeForm
+* @see Http/Controllers/Auth/VoterLoginController.php:12
+* @route '/login'
+*/
+storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store.url(options),
+    method: 'post',
+})
+
+store.form = storeForm
+
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::destroy
- * @see app/Http/Controllers/Auth/VoterLoginController.php:30
- * @route '/logout'
- */
+* @see Http/Controllers/Auth/VoterLoginController.php:30
+* @route '/logout'
+*/
 export const destroy = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: destroy.url(options),
     method: 'post',
@@ -71,44 +72,45 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::destroy
- * @see app/Http/Controllers/Auth/VoterLoginController.php:30
- * @route '/logout'
- */
+* @see Http/Controllers/Auth/VoterLoginController.php:30
+* @route '/logout'
+*/
 destroy.url = (options?: RouteQueryOptions) => {
     return destroy.definition.url + queryParams(options)
 }
 
 /**
 * @see \App\Http\Controllers\Auth\VoterLoginController::destroy
- * @see app/Http/Controllers/Auth/VoterLoginController.php:30
- * @route '/logout'
- */
+* @see Http/Controllers/Auth/VoterLoginController.php:30
+* @route '/logout'
+*/
 destroy.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: destroy.url(options),
     method: 'post',
 })
 
-    /**
+/**
 * @see \App\Http\Controllers\Auth\VoterLoginController::destroy
- * @see app/Http/Controllers/Auth/VoterLoginController.php:30
- * @route '/logout'
- */
-    const destroyForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: destroy.url(options),
-        method: 'post',
-    })
+* @see Http/Controllers/Auth/VoterLoginController.php:30
+* @route '/logout'
+*/
+const destroyForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(options),
+    method: 'post',
+})
 
-            /**
+/**
 * @see \App\Http\Controllers\Auth\VoterLoginController::destroy
- * @see app/Http/Controllers/Auth/VoterLoginController.php:30
- * @route '/logout'
- */
-        destroyForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: destroy.url(options),
-            method: 'post',
-        })
-    
-    destroy.form = destroyForm
+* @see Http/Controllers/Auth/VoterLoginController.php:30
+* @route '/logout'
+*/
+destroyForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(options),
+    method: 'post',
+})
+
+destroy.form = destroyForm
+
 const VoterLoginController = { store, destroy }
 
 export default VoterLoginController

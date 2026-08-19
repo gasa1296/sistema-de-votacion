@@ -75,6 +75,30 @@ import VoterTopBar from '@/components/VoterTopBar.vue';
 
                 <div class="space-y-3">
                     <Link
+                        href="/results"
+                        method="post"
+                        as="button"
+                        class="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-[#bd1622] px-6 py-4 text-base font-bold text-[#bd1622] transition-colors hover:bg-[#bd1622]/5"
+                    >
+                        Resultados
+                        <svg
+                            class="h-5 w-5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <rect x="3" y="11" width="18" height="11" rx="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                    </Link>
+                </div>
+
+                <div class="space-y-3">
+                    <Link
                         href="/logout"
                         method="post"
                         as="button"
