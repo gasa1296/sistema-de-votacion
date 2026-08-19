@@ -9,11 +9,6 @@ class StoreVoteRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        $debug = config('app.debug');
-        if ($debug) {
-            return auth()->check();
-        }
-
         return $this->user()->isVoter();
     }
 

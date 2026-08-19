@@ -10,20 +10,24 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 class SendVoterCredentialsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function __construct(
         private readonly User $voter,
-        private readonly string $plainPassword,
     ) {}
 
     public function handle(): void
     {
+        $plainPassword = Str::password(symbols: false);
+        $hashedPassword = Hash::make($plainPassword);
+        $this->voter->update(['password' => $hashedPassword]);
+
         Mail::to($this->voter->email)->queue(
-            new VoterCredentialsMail($this->voter, $this->plainPassword)
+            new VoterCredentialsMail($this->voter, $plainPassword)
         );
     }
 }

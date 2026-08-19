@@ -19,8 +19,8 @@ class ElectionResultsExport implements FromCollection, WithHeadings
             ->with('candidate')
             ->get()
             ->map(fn ($vote) => [
-                'Candidato' => $vote->candidate->name.' '.($vote->candidate->last_name ?? ''),
-                'Cargo' => $vote->candidate->position,
+                'Candidato' => $vote->candidate ? $vote->candidate->name.' '.($vote->candidate->last_name ?? '') : 'Voto en blanco',
+                'Cargo' => $vote->candidate?->position,
                 'IP Hash' => $vote->ip_hash ? substr($vote->ip_hash, 0, 16).'...' : 'N/A',
                 'Fecha Voto' => $vote->voted_at->format('Y-m-d H:i:s'),
             ]);

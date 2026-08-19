@@ -31,15 +31,11 @@ class VoterPasswordResetController extends Controller
             ->where('role', 'voter')
             ->first();
 
-        if (! $user) {
-            throw ValidationException::withMessages([
-                'email' => [__('No encontramos un votante con ese correo electrónico.')],
-            ]);
+        if ($user) {
+            $token = Password::broker('voters')->createToken($user);
+
+            Mail::to($user)->queue(new VoterResetPasswordMail($user, $token));
         }
-
-        $token = Password::broker('voters')->createToken($user);
-
-        Mail::to($user)->queue(new VoterResetPasswordMail($user, $token));
 
         return back()->with('status', __('Te hemos enviado un enlace para restablecer tu contraseña.'));
     }

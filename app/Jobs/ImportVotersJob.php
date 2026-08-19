@@ -57,24 +57,26 @@ class ImportVotersJob implements ShouldQueue
                     throw new \InvalidArgumentException('Fila '.($index + 1).': email y nombre son requeridos');
                 }
 
-                $voterCode = Str::upper(Str::random(8));
-                $plainPassword = Str::random(10);
+                $voter = User::where('email', $email)->first();
+                if (empty($voter)) {
+                    $voterCode = Str::upper(Str::random(8));
+                    $plainPassword = Str::random(10);
 
-                $voter = User::firstOrCreate(
-                    ['email' => $email],
-                    [
-                        'name' => $name,
-                        'last_name' => $lastName,
-                        'password' => Hash::make($plainPassword),
-                        'role' => 'voter',
-                        'voter_code' => $voterCode,
-                        'email_verified_at' => now(),
-                    ],
-                );
+                    $voter = User::create(
+                        [
+                            'email' => $email,
+                            'name' => $name,
+                            'last_name' => $lastName,
+                            'password' => Hash::make($plainPassword),
+                            'role' => 'voter',
+                            'voter_code' => $voterCode,
+                            'email_verified_at' => now(),
+                        ],
+                    );
+                    Mail::to($voter->email)->queue(new VoterCredentialsMail($voter, $plainPassword));
+                }
 
                 $voter->elections()->attach($this->election->id);
-
-                Mail::to($voter->email)->queue(new VoterCredentialsMail($voter, $plainPassword));
 
                 $imported++;
             } catch (\Throwable $e) {

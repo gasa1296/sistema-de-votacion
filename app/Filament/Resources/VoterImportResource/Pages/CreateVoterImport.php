@@ -42,6 +42,7 @@ class CreateVoterImport extends Page
             Forms\Components\FileUpload::make('file')
                 ->label('Archivo CSV/Excel')
                 ->acceptedFileTypes(['text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'])
+                ->maxSize(10240)
                 ->required(),
         ];
     }
@@ -51,7 +52,7 @@ class CreateVoterImport extends Page
         $data = $this->form->getState();
 
         $election = Election::findOrFail($data['election_id']);
-        $user = User::first(); // Admin user
+        $user = auth()->user(); // Admin user
 
         ImportVotersJob::dispatch(
             $data['file'],

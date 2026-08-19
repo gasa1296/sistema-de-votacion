@@ -16,7 +16,6 @@ class TestSeeder extends Seeder
         $election = Election::create([
             'name' => 'Elección de Prueba',
             'description' => 'Elección generada por TestSeeder para pruebas.',
-            'status' => 'open',
             'opens_at' => now(),
         ]);
 

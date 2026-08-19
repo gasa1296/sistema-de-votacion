@@ -17,7 +17,6 @@ class ElectionFactory extends Factory
         return [
             'name' => fake()->sentence(3),
             'description' => fake()->paragraph(),
-            'status' => 'pending',
             'opens_at' => null,
             'closes_at' => null,
         ];
@@ -26,15 +25,14 @@ class ElectionFactory extends Factory
     public function open(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => 'open',
             'opens_at' => now(),
+            'closes_at' => null,
         ]);
     }
 
     public function closed(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => 'closed',
             'opens_at' => now()->subDay(),
             'closes_at' => now(),
         ]);
@@ -43,8 +41,7 @@ class ElectionFactory extends Factory
     public function pending(): static
     {
         return $this->state(fn (array $attributes) => [
-            'status' => 'pending',
-            'opens_at' => null,
+            'opens_at' => now()->addDay(),
             'closes_at' => null,
         ]);
     }

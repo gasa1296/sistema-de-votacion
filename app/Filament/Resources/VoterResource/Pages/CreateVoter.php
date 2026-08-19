@@ -20,12 +20,12 @@ class CreateVoter extends CreateRecord
             $plainPassword = $data['password'];
         }
 
-        $data['password'] = bcrypt($plainPassword);
+        $data['password'] = $plainPassword;
         $data['role'] = 'voter';
 
         $record = parent::handleRecordCreation($data);
 
-        SendVoterCredentialsJob::dispatch($record, $plainPassword);
+        SendVoterCredentialsJob::dispatch($record);
 
         return $record;
     }

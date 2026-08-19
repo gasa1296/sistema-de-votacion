@@ -38,14 +38,6 @@ class ElectionResource extends Resource
                             ->maxLength(255),
                         Forms\Components\Textarea::make('description')
                             ->rows(3),
-                        Forms\Components\Select::make('status')
-                            ->options([
-                                'pending' => 'Pendiente',
-                                'open' => 'Abierta',
-                                'closed' => 'Cerrada',
-                            ])
-                            ->default('pending')
-                            ->required(),
                         Forms\Components\DateTimePicker::make('opens_at'),
                         Forms\Components\DateTimePicker::make('closes_at')
                             ->afterOrEqual('opens_at'),
@@ -60,17 +52,6 @@ class ElectionResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->badge(fn (string $state): string => match ($state) {
-                        'pending' => 'gray',
-                        'open' => 'success',
-                        'closed' => 'danger',
-                    })
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'pending' => 'Pendiente',
-                        'open' => 'Abierta',
-                        'closed' => 'Cerrada',
-                    }),
                 Tables\Columns\TextColumn::make('candidates_count')
                     ->counts('candidates')
                     ->label('Candidatos')
@@ -90,14 +71,7 @@ class ElectionResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                Tables\Filters\SelectFilter::make('status')
-                    ->options([
-                        'pending' => 'Pendiente',
-                        'open' => 'Abierta',
-                        'closed' => 'Cerrada',
-                    ]),
-            ])
+            ->filters([])
             ->actions([
                 Actions\EditAction::make(),
                 Actions\Action::make('open')
