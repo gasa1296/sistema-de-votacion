@@ -95,3 +95,28 @@ it('fails rows when required columns are missing', function (string $csvContent)
     'missing email' => ["nombre,apellido\nAna,Gomez\n"],
     'missing name' => ["email,apellido\nana@test.com,Gomez\n"],
 ]);
+
+it('renders voter credentials email template properly', function () {
+    $election = Election::factory()->create(['name' => 'Elección de Directiva']);
+    $voter = User::factory()->voter()->create([
+        'name' => 'César',
+        'last_name' => 'Victoria',
+        'email' => 'danlouis9701@gmail.com',
+        'voter_code' => 'Z8DEA30F',
+    ]);
+    $voter->elections()->attach($election->id);
+
+    $mailable = new VoterCredentialsMail($voter, 'NqFJoC1tYW');
+
+    $mailable->assertHasSubject('Tus credenciales de votación — Elección de Directiva');
+    $mailable->assertSeeInHtml('ASOCIACIÓN NACIONAL DE CARDIÓLOGOS DE MÉXICO');
+    $mailable->assertSeeInHtml('Sistema de Votación');
+    $mailable->assertSeeInHtml('Credenciales de votación');
+    $mailable->assertSeeInHtml('Hola César Victoria');
+    $mailable->assertSeeInHtml('Elección de Directiva');
+    $mailable->assertSeeInHtml('danlouis9701@gmail.com');
+    $mailable->assertSeeInHtml('NqFJoC1tYW');
+    $mailable->assertSeeInHtml('Z8DEA30F');
+    $mailable->assertSeeInHtml('Iniciar sesión');
+    $mailable->assertSeeInHtml('notificaciones@votacionancam.com');
+});

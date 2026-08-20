@@ -4,6 +4,7 @@ use App\Mail\VoteConfirmationMail;
 use App\Models\Candidate;
 use App\Models\Election;
 use App\Models\User;
+use App\Models\Vote;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -80,6 +81,34 @@ test('voter receives a confirmation email after casting vote', function () {
             && $mail->voter->is($user)
             && $mail->vote->election_id === $election->id;
     });
+});
+
+test('vote confirmation mail renders logo and vote details', function () {
+    $user = User::factory()->voter()->create(['name' => 'Carlos', 'last_name' => 'Gomez']);
+    $election = Election::factory()->open()->create(['name' => 'Elecciones Generales']);
+    $candidate = Candidate::factory()->create([
+        'name' => 'Ana',
+        'last_name' => 'Martinez',
+        'position' => 'Presidente',
+        'election_id' => $election->id,
+    ]);
+    $vote = Vote::create([
+        'election_id' => $election->id,
+        'candidate_id' => $candidate->id,
+        'ip_hash' => hash('sha256', '127.0.0.1'),
+        'voted_at' => now(),
+    ]);
+
+    $mail = new VoteConfirmationMail($user, $vote);
+    $html = $mail->render();
+
+    expect($html)
+        ->toContain('<img')
+        ->toContain(config('app.name'))
+        ->toContain('Carlos')
+        ->toContain('Elecciones Generales')
+        ->toContain('Ana Martinez')
+        ->toContain('Presidente');
 });
 
 test('voter cannot vote twice', function () {

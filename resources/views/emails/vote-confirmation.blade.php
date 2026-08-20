@@ -1,4 +1,19 @@
+@php
+    $logoSrc = asset('logo-anacam.svg');
+    if (isset($message) && method_exists($message, 'embed') && file_exists(public_path('logo-anacam.svg'))) {
+        try {
+            $logoSrc = $message->embed(public_path('logo-anacam.svg'));
+        } catch (\Throwable $e) {
+            $logoSrc = asset('logo-anacam.svg');
+        }
+    }
+@endphp
+
 <x-mail::message>
+<div align="center" style="text-align: center; margin-bottom: 24px;">
+    <img src="{{ $logoSrc }}" alt="{{ config('app.name') }}" width="80" style="display: block; margin: 0 auto; max-width: 80px; height: auto;" />
+</div>
+
 # Voto registrado
 
 Hola {{ $name }} {{ $lastName ?? '' }},
@@ -20,3 +35,4 @@ Tu voto es confidencial. Este correo es solo una confirmación de que fue emitid
 Gracias por participar,<br>
 {{ config('app.name') }}
 </x-mail::message>
+

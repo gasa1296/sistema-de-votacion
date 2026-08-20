@@ -32,7 +32,7 @@ class VoterCredentialsMail extends Mailable
         $electionName = $this->voter->elections()->first()?->name ?? config('app.name');
 
         return new Content(
-            markdown: 'emails.voter-credentials',
+            view: 'emails.voter-credentials',
             with: [
                 'name' => $this->voter->name,
                 'lastName' => $this->voter->last_name,
@@ -40,6 +40,8 @@ class VoterCredentialsMail extends Mailable
                 'password' => $this->plainPassword,
                 'voterCode' => $this->voter->voter_code,
                 'electionName' => $electionName,
+                'loginUrl' => url('/login'),
+                'supportEmail' => 'notificaciones@votacionancam.com',
             ],
         );
     }
