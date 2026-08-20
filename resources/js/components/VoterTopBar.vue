@@ -14,14 +14,22 @@ const electionDescription = computed(() => election.value?.description ?? 'Asamb
 const mobileMenuOpen = ref(false);
 
 const userInitials = computed(() => {
-    if (!user.value) return '';
+    if (!user.value) {
+        return '';
+    }
+
     const first = user.value.name?.charAt(0) ?? '';
+
     const last = user.value.last_name?.charAt(0) ?? '';
+
     return `${first}${last}`.toUpperCase();
 });
 
 const userFullName = computed(() => {
-    if (!user.value) return '';
+    if (!user.value) {
+        return '';
+    }
+    
     return `${user.value.name} ${user.value.last_name ?? ''}`.trim();
 });
 </script>
