@@ -75,8 +75,7 @@ import VoterTopBar from '@/components/VoterTopBar.vue';
 
                 <div class="space-y-3">
                     <Link
-                        href="/results"
-                        method="post"
+                        href="/resultados"
                         as="button"
                         class="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-[#bd1622] px-6 py-4 text-base font-bold text-[#bd1622] transition-colors hover:bg-[#bd1622]/5"
                     >
