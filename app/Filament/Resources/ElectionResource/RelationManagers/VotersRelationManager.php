@@ -53,8 +53,6 @@ class VotersRelationManager extends RelationManager
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('voter_code')
-                    ->label('Código'),
             ])
             ->headerActions([
                 Actions\CreateAction::make()

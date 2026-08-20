@@ -24,7 +24,6 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'role' => 'voter',
-            'voter_code' => strtoupper(Str::random(8)),
         ];
     }
 
@@ -32,7 +31,6 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => 'admin',
-            'voter_code' => null,
         ]);
     }
 

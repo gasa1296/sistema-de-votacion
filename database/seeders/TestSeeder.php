@@ -36,7 +36,6 @@ class TestSeeder extends Seeder
                 'last_name' => "Apellido $i",
                 'email' => "votante$i@example.com",
                 'password' => Hash::make('password'),
-                'voter_code' => strtoupper(Str::random(8)),
             ]);
             $user->elections()->attach($election->id);
             $user->assignRole('voter');

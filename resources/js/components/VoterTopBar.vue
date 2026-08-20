@@ -42,7 +42,7 @@ const userFullName = computed(() => {
                 class="flex items-center gap-3 rounded-md text-white transition-opacity hover:opacity-90"
             >
                 <img
-                    src="/logo-anacam.svg"
+                    src="/logo.svg"
                     alt="Logo"
                     class="h-9 w-auto"
                 />

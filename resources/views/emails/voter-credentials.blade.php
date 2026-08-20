@@ -29,19 +29,11 @@
 </head>
 <body style="margin: 0; padding: 0; background-color: #f4f6f8; -webkit-font-smoothing: antialiased;">
 @php
-    $logoSrc = asset('logo-anacam.svg');
-    if (isset($message) && method_exists($message, 'embed') && file_exists(public_path('logo-anacam.svg'))) {
-        try {
-            $logoSrc = $message->embed(public_path('logo-anacam.svg'));
-        } catch (\Throwable $e) {
-            $logoSrc = asset('logo-anacam.svg');
-        }
+    try {
+        $logoSrc = $message->embed(public_path(config('app.logo')));
+    } catch (\Throwable $e) {
+        $logoSrc = asset(config('app.logo'));
     }
-    $loginUrl = $loginUrl ?? url('/login');
-    $supportEmail = $supportEmail ?? 'notificaciones@votacionancam.com';
-    $host = parse_url($loginUrl, PHP_URL_HOST);
-    $domainName = ($host && $host !== 'localhost' && $host !== '127.0.0.1') ? $host : 'votacionancam.com';
-    $fullName = trim(($name ?? '') . ' ' . ($lastName ?? ''));
 @endphp
 
 <!-- Wrapper Table -->
@@ -135,27 +127,10 @@
                                         <tr>
                                             <td valign="middle">
                                                 <div style="font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-                                                    Contraseña temporal
+                                                    Contraseña
                                                 </div>
                                                 <div class="cred-value" style="font-size: 18px; font-weight: 700; color: #111827; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; letter-spacing: 1.5px;">
                                                     {{ $password }}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <!-- Voter Code -->
-                            <tr>
-                                <td style="padding: 10px 0;">
-                                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td valign="middle">
-                                                <div style="font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 2px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-                                                    Código de votante
-                                                </div>
-                                                <div class="cred-value" style="font-size: 18px; font-weight: 700; color: #111827; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; letter-spacing: 1.5px;">
-                                                    {{ $voterCode }}
                                                 </div>
                                             </td>
                                         </tr>
@@ -209,9 +184,7 @@
                                                     Importante
                                                 </div>
                                                 <ul style="margin: 0; padding: 0 0 0 16px; font-size: 13px; color: #374151; line-height: 1.55; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-                                                    <li style="margin-bottom: 4px;">Debes cambiar tu contraseña después de iniciar sesión por primera vez.</li>
                                                     <li style="margin-bottom: 4px;">No compartas tus credenciales con nadie.</li>
-                                                    <li>El código de votante es único e intransferible.</li>
                                                 </ul>
                                             </td>
                                         </tr>

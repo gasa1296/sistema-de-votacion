@@ -1,11 +1,8 @@
 @php
-    $logoSrc = asset('logo-anacam.svg');
-    if (isset($message) && method_exists($message, 'embed') && file_exists(public_path('logo-anacam.svg'))) {
-        try {
-            $logoSrc = $message->embed(public_path('logo-anacam.svg'));
-        } catch (\Throwable $e) {
-            $logoSrc = asset('logo-anacam.svg');
-        }
+    try {
+        $logoSrc = $message->embed(public_path(config('app.logo')));
+    } catch (\Throwable $e) {
+        $logoSrc = asset(config('app.logo'));
     }
 @endphp
 

@@ -69,7 +69,6 @@ class ImportVotersJob implements ShouldQueue
                             'last_name' => $lastName,
                             'password' => Hash::make($plainPassword),
                             'role' => 'voter',
-                            'voter_code' => $voterCode,
                             'email_verified_at' => now(),
                         ],
                     );

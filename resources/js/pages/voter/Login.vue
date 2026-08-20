@@ -31,7 +31,7 @@ function submit() {
         <div class="w-full max-w-sm">
             <div class="mb-8 text-center">
                 <img
-                    src="/logo-anacam.svg"
+                    src="/logo.svg"
                     alt="Logo"
                     class="mx-auto h-16 w-auto"
                 />

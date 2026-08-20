@@ -34,14 +34,14 @@ class VoterCredentialsMail extends Mailable
         return new Content(
             view: 'emails.voter-credentials',
             with: [
-                'name' => $this->voter->name,
-                'lastName' => $this->voter->last_name,
+                'logoSrc' => asset(config('app.logo')),
+                'fullName' => trim($this->voter->name.' '.$this->voter->last_name),
                 'email' => $this->voter->email,
                 'password' => $this->plainPassword,
-                'voterCode' => $this->voter->voter_code,
                 'electionName' => $electionName,
                 'loginUrl' => url('/login'),
-                'supportEmail' => 'notificaciones@votacionancam.com',
+                'supportEmail' => config('mail.from.address'),
+                'domainName' => config('app.name')
             ],
         );
     }

@@ -31,6 +31,7 @@ class VoteConfirmationMail extends Mailable
         return new Content(
             markdown: 'emails.vote-confirmation',
             with: [
+                'logoSrc' => asset(config('app.logo')),
                 'name' => $this->voter->name,
                 'lastName' => $this->voter->last_name,
                 'electionName' => $this->vote->election->name,

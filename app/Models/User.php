@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,13 +23,12 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $password
  * @property string|null $remember_token
  * @property string $role
- * @property string|null $voter_code
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'last_name', 'email', 'password', 'role', 'voter_code'])]
+#[Fillable(['name', 'last_name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, HasRoles, Notifiable;
@@ -41,6 +42,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->isAdmin();
     }
 
     public function isAdmin(): bool
@@ -58,5 +64,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Election::class)
             ->withPivot('has_voted', 'voted_at')
             ->withTimestamps();
+    }
+
+    public function hasVotedInElection(Election $election): bool
+    {
+        return $this->elections()
+            ->where('election_id', $election->id)
+            ->wherePivot('has_voted', true)
+            ->exists();
     }
 }

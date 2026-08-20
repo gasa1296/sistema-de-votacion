@@ -34,7 +34,6 @@ it('imports voters from csv and sends credentials', function () {
     expect($ana)->not->toBeNull();
     expect($luis)->not->toBeNull();
     expect($ana->role)->toBe('voter');
-    expect($ana->voter_code)->not->toBeNull();
     expect($ana->elections()->where('election_id', $election->id)->exists())->toBeTrue();
 
     Mail::assertQueued(VoterCredentialsMail::class, 2);
@@ -102,7 +101,6 @@ it('renders voter credentials email template properly', function () {
         'name' => 'César',
         'last_name' => 'Victoria',
         'email' => 'danlouis9701@gmail.com',
-        'voter_code' => 'Z8DEA30F',
     ]);
     $voter->elections()->attach($election->id);
 

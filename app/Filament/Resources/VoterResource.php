@@ -39,10 +39,6 @@ class VoterResource extends Resource
                 ->email()
                 ->required()
                 ->maxLength(255),
-            Forms\Components\TextInput::make('voter_code')
-                ->label('Código del Votante')
-                ->maxLength(255)
-                ->disabled(),
         ];
         if (config('app.debug')) {
             $form[] = Forms\Components\TextInput::make('password')
@@ -73,9 +69,6 @@ class VoterResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('voter_code')
-                    ->label('Código')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('d/m/Y H:i')
                     ->sortable()
