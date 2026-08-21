@@ -41,7 +41,7 @@ class VoterCredentialsMail extends Mailable
                 'electionName' => $electionName,
                 'loginUrl' => url('/login'),
                 'supportEmail' => config('mail.from.address'),
-                'domainName' => config('app.name')
+                'domainName' => config('app.name'),
             ],
         );
     }

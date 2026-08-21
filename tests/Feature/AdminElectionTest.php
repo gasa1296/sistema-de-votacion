@@ -1,11 +1,13 @@
 <?php
 
+use App\Filament\Pages\ElectionResults;
 use App\Models\Candidate;
 use App\Models\Election;
 use App\Models\User;
 use App\Models\Vote;
 use App\Services\ElectionService;
 use Illuminate\Support\Facades\Gate;
+use Livewire\Livewire;
 
 test('admin can manage elections', function () {
     $admin = User::factory()->admin()->create();
@@ -67,4 +69,55 @@ test('only admin can view votes', function () {
     expect(Gate::forUser($admin)->allows('viewAny', Vote::class))->toBeTrue();
     expect(Gate::forUser($admin)->allows('view', $vote))->toBeTrue();
     expect(Gate::forUser($voter)->denies('viewAny', Vote::class))->toBeTrue();
+});
+
+test('admin can view election results page with pie chart and ranking', function () {
+    $admin = User::factory()->admin()->create();
+    $election = Election::factory()->open()->create(['name' => 'Elección Presidencial']);
+    $candidate1 = Candidate::factory()->create([
+        'election_id' => $election->id,
+        'name' => 'Ana Morales',
+        'position' => 'Presidenta',
+    ]);
+    $candidate2 = Candidate::factory()->create([
+        'election_id' => $election->id,
+        'name' => 'Carlos Mendoza',
+        'position' => 'Vicepresidente',
+    ]);
+
+    Vote::create([
+        'election_id' => $election->id,
+        'candidate_id' => $candidate1->id,
+        'voted_at' => now(),
+    ]);
+
+    $this->actingAs($admin);
+
+    Livewire::test(ElectionResults::class)
+        ->assertSuccessful()
+        ->assertSee('Elección Presidencial')
+        ->assertSee('Ana Morales')
+        ->assertSee('Carlos Mendoza')
+        ->assertSee('Gráfica de Resultados')
+        ->assertSee('Votos Emitidos')
+        ->assertSee('Padrón Habilitado')
+        ->assertSee('Participación');
+});
+
+test('election results page handles empty states and election switching', function () {
+    $admin = User::factory()->admin()->create();
+    $this->actingAs($admin);
+
+    Livewire::test(ElectionResults::class)
+        ->assertSuccessful();
+
+    $electionA = Election::factory()->closed()->create(['name' => 'Elección Alpha']);
+    $electionB = Election::factory()->open()->create(['name' => 'Elección Beta']);
+
+    Livewire::test(ElectionResults::class)
+        ->assertSuccessful()
+        ->set('selectedElectionId', $electionA->id)
+        ->assertSee('Elección Alpha')
+        ->set('selectedElectionId', $electionB->id)
+        ->assertSee('Elección Beta');
 });
