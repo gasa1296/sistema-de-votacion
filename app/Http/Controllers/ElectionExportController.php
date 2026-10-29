@@ -11,7 +11,7 @@ class ElectionExportController extends Controller
 {
     public function pdf(Election $election)
     {
-        $candidateName = fn ($vote) => $vote->candidate ? $vote->candidate->name.' '.($vote->candidate->last_name ?? '') : 'Voto en blanco';
+        $candidateName = fn ($vote) => $vote->candidate ? $vote->candidate->name.' '.($vote->candidate->last_name ?? '') : 'Voto en abstención';
         $results = $election->votes()
             ->with('candidate')
             ->get()

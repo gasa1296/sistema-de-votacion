@@ -31,7 +31,7 @@ const currentStep = ref(1);
 
 const blankVote: Candidate = {
     id: 0,
-    name: 'Voto en blanco',
+    name: 'Voto en abstención',
     position: '',
     description: 'Si prefieres no elegir ningún candidato.',
 };
@@ -187,7 +187,7 @@ function closeProfile() {
                         @view-profile="openProfile"
                     />
 
-                    <!-- Voto en Blanco -->
+                    <!-- Voto en abstención -->
                     <CandidateCard
                         :candidate="blankVote"
                         :selected="selectedCandidate?.id === 0"

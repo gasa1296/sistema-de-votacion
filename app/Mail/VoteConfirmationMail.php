@@ -35,8 +35,8 @@ class VoteConfirmationMail extends Mailable
                 'name' => $this->voter->name,
                 'lastName' => $this->voter->last_name,
                 'electionName' => $this->vote->election->name,
-                'candidateName' => $this->vote->candidate->name.' '.($this->vote->candidate->last_name ?? ''),
-                'position' => $this->vote->candidate->position,
+                'candidateName' => $this->vote->candidate ? $this->vote->candidate->name.' '.($this->vote->candidate->last_name ?? '') : 'Voto en abstención',
+                'position' => $this->vote->candidate?->position ?? 'N/A',
                 'votedAt' => $this->vote->voted_at->format('d/m/Y H:i'),
             ],
         );

@@ -111,6 +111,24 @@ test('vote confirmation mail renders logo and vote details', function () {
         ->toContain('Presidente');
 });
 
+test('vote confirmation mail renders abstention vote correctly', function () {
+    $user = User::factory()->voter()->create(['name' => 'Carlos', 'last_name' => 'Gomez']);
+    $election = Election::factory()->open()->create(['name' => 'Elecciones Generales']);
+    $vote = Vote::create([
+        'election_id' => $election->id,
+        'candidate_id' => null,
+        'ip_hash' => hash('sha256', '127.0.0.1'),
+        'voted_at' => now(),
+    ]);
+
+    $mail = new VoteConfirmationMail($user, $vote);
+    $html = $mail->render();
+
+    expect($html)
+        ->toContain('<img')
+        ->toContain('Voto en abstención');
+});
+
 test('voter cannot vote twice', function () {
     $user = User::factory()->voter()->create();
     $election = Election::factory()->open()->create();

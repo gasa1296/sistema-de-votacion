@@ -29,9 +29,14 @@
 </head>
 <body style="margin: 0; padding: 0; background-color: #f4f6f8; -webkit-font-smoothing: antialiased;">
 @php
-    try {
-        $logoSrc = $message->embed(public_path(config('app.logo')));
-    } catch (\Throwable $e) {
+    $logoPath = public_path(config('app.logo'));
+    if (file_exists($logoPath)) {
+        try {
+            $logoSrc = $message->embed($logoPath);
+        } catch (\Throwable $e) {
+            $logoSrc = asset(config('app.logo'));
+        }
+    } else {
         $logoSrc = asset(config('app.logo'));
     }
 @endphp
