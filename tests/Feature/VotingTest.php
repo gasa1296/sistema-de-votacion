@@ -212,3 +212,43 @@ test('guest sees results page without user', function () {
         ->component('voter/Results/Index')
         ->where('user', null));
 });
+
+test('voter can check election status and sees is_open true when election is open', function () {
+    $user = User::factory()->voter()->create();
+    $election = Election::factory()->open()->create();
+    $election->users()->attach($user, ['has_voted' => false]);
+
+    $this->actingAs($user, 'voter');
+
+    $response = $this->getJson(route('api.election-status'));
+
+    $response->assertSuccessful();
+    $response->assertJson(['is_open' => true]);
+});
+
+test('voter checks election status and sees is_open false when election is closed', function () {
+    $user = User::factory()->voter()->create();
+    $election = Election::factory()->closed()->create();
+    $election->users()->attach($user, ['has_voted' => false]);
+
+    $this->actingAs($user, 'voter');
+
+    $response = $this->getJson(route('api.election-status'));
+
+    $response->assertSuccessful();
+    $response->assertJson(['is_open' => false]);
+});
+
+test('voter checks election status and sees is_open false when open election is for other users', function () {
+    $user = User::factory()->voter()->create();
+    $otherUser = User::factory()->voter()->create();
+    $election = Election::factory()->open()->create();
+    $election->users()->attach($otherUser, ['has_voted' => false]);
+
+    $this->actingAs($user, 'voter');
+
+    $response = $this->getJson(route('api.election-status'));
+
+    $response->assertSuccessful();
+    $response->assertJson(['is_open' => false]);
+});

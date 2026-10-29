@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import StatusPage from '@/components/Voter/StatusPage.vue';
+import { useElectionPoll } from '@/composables/useElectionPoll';
+
+useElectionPoll(10000);
 </script>
 
 <template>

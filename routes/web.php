@@ -83,6 +83,15 @@ Route::middleware(['auth:voter'])->group(function () {
             'results' => app(ElectionService::class)->results($election),
         ]);
     })->name('api.results');
+
+    Route::get('/api/election-status', function () {
+        $user = request()->user();
+        $isOpen = $user->elections()->open()->exists(); 
+
+        return response()->json([
+            'is_open' => $isOpen,
+        ]);
+    })->name('api.election-status');
 });
 
 // Export routes (admin guard handled by Filament, but we add for direct access)
