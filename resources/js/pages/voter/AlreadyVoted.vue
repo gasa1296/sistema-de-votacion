@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import StatusPage from '@/components/Voter/StatusPage.vue';
+import { useElectionPoll } from '@/composables/useElectionPoll';
+
+useElectionPoll(10000);
 </script>
 
 <template>

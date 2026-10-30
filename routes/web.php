@@ -86,7 +86,7 @@ Route::middleware(['auth:voter'])->group(function () {
 
     Route::get('/api/election-status', function () {
         $user = request()->user();
-        $isOpen = $user->elections()->open()->exists(); 
+        $isOpen = $user->elections()->open()->wherePivot('has_voted', false)->exists(); 
 
         return response()->json([
             'is_open' => $isOpen,

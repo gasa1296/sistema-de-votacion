@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import VoterTopBar from '@/components/VoterTopBar.vue';
+import { useElectionPoll } from '@/composables/useElectionPoll';
+
+useElectionPoll(10000);
 </script>
 
 <template>

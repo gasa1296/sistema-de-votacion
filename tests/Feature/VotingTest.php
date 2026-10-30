@@ -252,3 +252,32 @@ test('voter checks election status and sees is_open false when open election is 
     $response->assertSuccessful();
     $response->assertJson(['is_open' => false]);
 });
+
+test('voter checks election status and sees is_open false when voter has already voted in open election', function () {
+    $user = User::factory()->voter()->create();
+    $election = Election::factory()->open()->create();
+    $election->users()->attach($user, ['has_voted' => true, 'voted_at' => now()]);
+
+    $this->actingAs($user, 'voter');
+
+    $response = $this->getJson(route('api.election-status'));
+
+    $response->assertSuccessful();
+    $response->assertJson(['is_open' => false]);
+});
+
+test('voter checks election status and sees is_open true when voter has an open election pending to vote', function () {
+    $user = User::factory()->voter()->create();
+    $votedElection = Election::factory()->open()->create();
+    $votedElection->users()->attach($user, ['has_voted' => true, 'voted_at' => now()]);
+
+    $pendingElection = Election::factory()->open()->create();
+    $pendingElection->users()->attach($user, ['has_voted' => false]);
+
+    $this->actingAs($user, 'voter');
+
+    $response = $this->getJson(route('api.election-status'));
+
+    $response->assertSuccessful();
+    $response->assertJson(['is_open' => true]);
+});

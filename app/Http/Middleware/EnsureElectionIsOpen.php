@@ -12,7 +12,8 @@ class EnsureElectionIsOpen
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-        $election = $user->elections()->open()->first();
+        $election = $user->elections()->open()->wherePivot('has_voted', false)->first()
+            ?? $user->elections()->open()->first();
 
         if (! $election) {
             return redirect()->route('voter.election-closed');
