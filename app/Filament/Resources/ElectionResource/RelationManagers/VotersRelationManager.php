@@ -55,6 +55,12 @@ class VotersRelationManager extends RelationManager
                     ->searchable(),
             ])
             ->headerActions([
+                Actions\Action::make('exportVotedUsers')
+                    ->label('Exportar votantes que votaron')
+                    ->icon('heroicon-m-table-cells')
+                    ->color('gray')
+                    ->url(fn (): string => route('admin.election.export.voters.excel', $this->getOwnerRecord()))
+                    ->openUrlInNewTab(),
                 Actions\CreateAction::make()
                     ->label('Asignar votante')
                     ->modalHeading('Asignar votante a la elección')

@@ -100,4 +100,6 @@ Route::middleware(['auth:web', 'can:viewAny,App\Models\Election'])->group(functi
         ->name('admin.election.export.pdf');
     Route::get('/elecciones/{election}/exportar/excel', [ElectionExportController::class, 'excel'])
         ->name('admin.election.export.excel');
+    Route::get('/elecciones/{election}/exportar/votantes-excel', [ElectionExportController::class, 'votedUsersExcel'])
+        ->name('admin.election.export.voters.excel');
 });

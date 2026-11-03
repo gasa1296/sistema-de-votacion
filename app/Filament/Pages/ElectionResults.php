@@ -213,6 +213,14 @@ class ElectionResults extends Page
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('exportVotedUsers')
+                ->label('Exportar Votantes')
+                ->icon('heroicon-m-users')
+                ->color('gray')
+                ->url(fn (): ?string => $this->selectedElectionId ? route('admin.election.export.voters.excel', $this->selectedElectionId) : null)
+                ->openUrlInNewTab()
+                ->visible(fn (): bool => filled($this->selectedElectionId)),
+
             Action::make('exportExcel')
                 ->label('Exportar Excel')
                 ->icon('heroicon-m-table-cells')

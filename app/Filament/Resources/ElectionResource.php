@@ -102,6 +102,11 @@ class ElectionResource extends Resource
                     ->icon('heroicon-m-table-cells')
                     ->color('gray')
                     ->url(fn (Election $record): string => route('admin.election.export.excel', $record)),
+                Actions\Action::make('exportVotedUsers')
+                    ->label('Votantes')
+                    ->icon('heroicon-m-users')
+                    ->color('gray')
+                    ->url(fn (Election $record): string => route('admin.election.export.voters.excel', $record)),
             ])
             ->bulkActions([
                 Actions\BulkActionGroup::make([

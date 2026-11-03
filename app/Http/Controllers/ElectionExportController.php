@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ElectionResultsExport;
+use App\Exports\ElectionVotedUsersExport;
 use App\Models\Election;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ElectionExportController extends Controller
 {
@@ -37,6 +39,14 @@ class ElectionExportController extends Controller
         return Excel::download(
             new ElectionResultsExport($election),
             "resultados-{$election->name}.xlsx"
+        );
+    }
+
+    public function votedUsersExcel(Election $election): BinaryFileResponse
+    {
+        return Excel::download(
+            new ElectionVotedUsersExport($election),
+            "votantes-{$election->name}.xlsx"
         );
     }
 }
