@@ -1,7 +1,8 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import voters from './voters'
 /**
 * @see \App\Http\Controllers\ElectionExportController::pdf
- * @see app/Http/Controllers/ElectionExportController.php:12
+ * @see app/Http/Controllers/ElectionExportController.php:14
  * @route '/elecciones/{election}/exportar/pdf'
  */
 export const pdf = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +17,7 @@ pdf.definition = {
 
 /**
 * @see \App\Http\Controllers\ElectionExportController::pdf
- * @see app/Http/Controllers/ElectionExportController.php:12
+ * @see app/Http/Controllers/ElectionExportController.php:14
  * @route '/elecciones/{election}/exportar/pdf'
  */
 pdf.url = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -49,7 +50,7 @@ pdf.url = (args: { election: number | { id: number } } | [election: number | { i
 
 /**
 * @see \App\Http\Controllers\ElectionExportController::pdf
- * @see app/Http/Controllers/ElectionExportController.php:12
+ * @see app/Http/Controllers/ElectionExportController.php:14
  * @route '/elecciones/{election}/exportar/pdf'
  */
 pdf.get = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -58,7 +59,7 @@ pdf.get = (args: { election: number | { id: number } } | [election: number | { i
 })
 /**
 * @see \App\Http\Controllers\ElectionExportController::pdf
- * @see app/Http/Controllers/ElectionExportController.php:12
+ * @see app/Http/Controllers/ElectionExportController.php:14
  * @route '/elecciones/{election}/exportar/pdf'
  */
 pdf.head = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -68,7 +69,7 @@ pdf.head = (args: { election: number | { id: number } } | [election: number | { 
 
     /**
 * @see \App\Http\Controllers\ElectionExportController::pdf
- * @see app/Http/Controllers/ElectionExportController.php:12
+ * @see app/Http/Controllers/ElectionExportController.php:14
  * @route '/elecciones/{election}/exportar/pdf'
  */
     const pdfForm = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -78,7 +79,7 @@ pdf.head = (args: { election: number | { id: number } } | [election: number | { 
 
             /**
 * @see \App\Http\Controllers\ElectionExportController::pdf
- * @see app/Http/Controllers/ElectionExportController.php:12
+ * @see app/Http/Controllers/ElectionExportController.php:14
  * @route '/elecciones/{election}/exportar/pdf'
  */
         pdfForm.get = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -87,7 +88,7 @@ pdf.head = (args: { election: number | { id: number } } | [election: number | { 
         })
             /**
 * @see \App\Http\Controllers\ElectionExportController::pdf
- * @see app/Http/Controllers/ElectionExportController.php:12
+ * @see app/Http/Controllers/ElectionExportController.php:14
  * @route '/elecciones/{election}/exportar/pdf'
  */
         pdfForm.head = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -103,7 +104,7 @@ pdf.head = (args: { election: number | { id: number } } | [election: number | { 
     pdf.form = pdfForm
 /**
 * @see \App\Http\Controllers\ElectionExportController::excel
- * @see app/Http/Controllers/ElectionExportController.php:35
+ * @see app/Http/Controllers/ElectionExportController.php:37
  * @route '/elecciones/{election}/exportar/excel'
  */
 export const excel = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -118,7 +119,7 @@ excel.definition = {
 
 /**
 * @see \App\Http\Controllers\ElectionExportController::excel
- * @see app/Http/Controllers/ElectionExportController.php:35
+ * @see app/Http/Controllers/ElectionExportController.php:37
  * @route '/elecciones/{election}/exportar/excel'
  */
 excel.url = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -151,7 +152,7 @@ excel.url = (args: { election: number | { id: number } } | [election: number | {
 
 /**
 * @see \App\Http\Controllers\ElectionExportController::excel
- * @see app/Http/Controllers/ElectionExportController.php:35
+ * @see app/Http/Controllers/ElectionExportController.php:37
  * @route '/elecciones/{election}/exportar/excel'
  */
 excel.get = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -160,7 +161,7 @@ excel.get = (args: { election: number | { id: number } } | [election: number | {
 })
 /**
 * @see \App\Http\Controllers\ElectionExportController::excel
- * @see app/Http/Controllers/ElectionExportController.php:35
+ * @see app/Http/Controllers/ElectionExportController.php:37
  * @route '/elecciones/{election}/exportar/excel'
  */
 excel.head = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -170,7 +171,7 @@ excel.head = (args: { election: number | { id: number } } | [election: number | 
 
     /**
 * @see \App\Http\Controllers\ElectionExportController::excel
- * @see app/Http/Controllers/ElectionExportController.php:35
+ * @see app/Http/Controllers/ElectionExportController.php:37
  * @route '/elecciones/{election}/exportar/excel'
  */
     const excelForm = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -180,7 +181,7 @@ excel.head = (args: { election: number | { id: number } } | [election: number | 
 
             /**
 * @see \App\Http\Controllers\ElectionExportController::excel
- * @see app/Http/Controllers/ElectionExportController.php:35
+ * @see app/Http/Controllers/ElectionExportController.php:37
  * @route '/elecciones/{election}/exportar/excel'
  */
         excelForm.get = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -189,7 +190,7 @@ excel.head = (args: { election: number | { id: number } } | [election: number | 
         })
             /**
 * @see \App\Http\Controllers\ElectionExportController::excel
- * @see app/Http/Controllers/ElectionExportController.php:35
+ * @see app/Http/Controllers/ElectionExportController.php:37
  * @route '/elecciones/{election}/exportar/excel'
  */
         excelForm.head = (args: { election: number | { id: number } } | [election: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -206,6 +207,7 @@ excel.head = (args: { election: number | { id: number } } | [election: number | 
 const exportMethod = {
     pdf: Object.assign(pdf, pdf),
 excel: Object.assign(excel, excel),
+voters: Object.assign(voters, voters),
 }
 
 export default exportMethod
